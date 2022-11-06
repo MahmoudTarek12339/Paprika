@@ -4,6 +4,13 @@ class AppStrings {
   static const recipesWorld = "Recipes World";
   static const startCooking = "Start Cooking";
 
+  //state renderer
+  static const loading = "loading";
+  static const retryAgain = "retry_again";
+  static const ok = "ok";
+  static const success = "success";
+
+
 
   // error handler
   static const badRequestError = "bad_request_error";
