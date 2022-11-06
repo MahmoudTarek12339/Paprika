@@ -10,7 +10,14 @@ class AppStrings {
   static const ok = "ok";
   static const success = "success";
 
-
+  //login
+  static const username = "UserName";
+  static const password = "password";
+  static const usernameError = "Please enter your Email";
+  static const passwordError = "Please enter your Password";
+  static const login = "Login";
+  static const forgetPassword = "Forget Password?";
+  static const registerText = "Not a member ? Sign up";
 
   // error handler
   static const badRequestError = "bad_request_error";
