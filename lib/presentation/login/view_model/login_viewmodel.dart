@@ -11,7 +11,7 @@ class LoginViewModel extends BaseViewModel
   final StreamController _passwordStreamController =
       StreamController<String>.broadcast();
   final StreamController _areAllInputsValidStreamController =
-      StreamController<bool>.broadcast();
+      StreamController<void>.broadcast();
   StreamController isUserLoggedInSuccessfullyStreamController =
       StreamController<bool>();
 
@@ -25,11 +25,11 @@ class LoginViewModel extends BaseViewModel
 
   @override
   void dispose() {
+    super.dispose();
     _emailStreamController.close();
     _passwordStreamController.close();
     _areAllInputsValidStreamController.close();
     isUserLoggedInSuccessfullyStreamController.close();
-    super.dispose();
   }
 
   @override
@@ -76,8 +76,8 @@ class LoginViewModel extends BaseViewModel
       .map((password) => _isPasswordValid(password));
 
   bool _areAllInputsValid() {
-    return _isEmailValid(loginObject.userName) &&
-        _isPasswordValid(loginObject.password);
+    return _isPasswordValid(loginObject.password) &&
+        _isEmailValid(loginObject.userName);
   }
 
   bool _isEmailValid(String email) {

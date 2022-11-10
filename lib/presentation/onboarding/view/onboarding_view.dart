@@ -3,6 +3,7 @@ import 'package:paprika/presentation/resources/color_manager.dart';
 import 'package:paprika/presentation/resources/values_manager.dart';
 
 import '../../resources/assets_manager.dart';
+import '../../resources/routes_manager.dart';
 import '../../resources/strings_manager.dart';
 
 class OnBoardingView extends StatefulWidget {
@@ -31,7 +32,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(25),
                 child: Container(
-                  color: ColorManager.white.withOpacity(0.7),
+                  color: ColorManager.white.withOpacity(0.95),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -45,32 +46,37 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                       ),
                       Text(
                         AppStrings.paprika,
-                        style: Theme.of(context).textTheme.displayMedium,
+                        style: Theme.of(context).textTheme.headlineLarge,
                       ),
                       const SizedBox(
                         height: AppSize.s4,
                       ),
                       Text(
-                        'Nutritionally balanced, easy to cook recipes.',
+                        'Every Time Every Where.',
                         style: Theme.of(context).textTheme.headlineMedium,
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(
-                        height: AppSize.s18,
+                        height: AppSize.s8,
                       ),
                       ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                                context, Routes.loginRoute);
+                          },
                           child: const Text('Create Account')),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            'Already have account?',
-                            style: Theme.of(context).textTheme.headlineMedium,
-                          ),
-
+                          Text('Already have account?',
+                              style:
+                                  Theme.of(context).textTheme.headlineMedium),
                           TextButton(
-                              onPressed: () {}, child: const Text('Login'))
+                              onPressed: () {
+                                Navigator.pushReplacementNamed(
+                                    context, Routes.loginRoute);
+                              },
+                              child: const Text('Log In'))
                         ],
                       )
                     ],

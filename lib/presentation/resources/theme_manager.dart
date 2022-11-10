@@ -40,13 +40,15 @@ ThemeData getApplicationTheme() {
                 borderRadius: BorderRadius.circular(AppSize.s12)))),
     textTheme: TextTheme(
         displayLarge: getBoldtStyle(
-            color: ColorManager.darkPrimary, fontSize: FontSize.s24),
+            color: ColorManager.darkPrimary, fontSize: FontSize.s64),
         displayMedium: getSemiBoldStyle(
-            color: ColorManager.lightBlack, fontSize: FontSize.s18),
+            color: ColorManager.lightBlack, fontSize: FontSize.s24),
+        displaySmall: getSemiBoldStyle(
+            color: ColorManager.lightBlack, fontSize: FontSize.s16),
         headlineLarge: getSemiBoldStyle(
-            color: ColorManager.darkGrey, fontSize: FontSize.s16),
-        headlineMedium: getRegularStyle(
-            color: ColorManager.lightBlack, fontSize: FontSize.s14),
+            color: ColorManager.darkGrey, fontSize: FontSize.s24),
+        headlineMedium: getSemiBoldStyle(
+            color: ColorManager.lightGrey, fontSize: FontSize.s14),
         headlineSmall: getRegularStyle(
             color: ColorManager.lightGrey, fontSize: FontSize.s16),
         titleMedium:
@@ -63,30 +65,30 @@ ThemeData getApplicationTheme() {
         contentPadding: const EdgeInsets.all(AppPadding.p8),
         // hint style
         hintStyle:
-            getRegularStyle(color: ColorManager.grey, fontSize: FontSize.s14),
+            getRegularStyle(color: ColorManager.darkBlue, fontSize: FontSize.s14),
         labelStyle:
-            getMediumStyle(color: ColorManager.grey, fontSize: FontSize.s14),
+            getMediumStyle(color: ColorManager.darkBlue, fontSize: FontSize.s14),
         errorStyle: getRegularStyle(color: ColorManager.error),
 
         // enabled border style
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: UnderlineInputBorder(
             borderSide:
                 BorderSide(color: ColorManager.grey, width: AppSize.s1_5),
             borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8))),
 
         // focused border style
-        focusedBorder: OutlineInputBorder(
+        focusedBorder: UnderlineInputBorder(
             borderSide:
                 BorderSide(color: ColorManager.primary, width: AppSize.s1_5),
             borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8))),
 
         // error border style
-        errorBorder: OutlineInputBorder(
+        errorBorder: UnderlineInputBorder(
             borderSide:
                 BorderSide(color: ColorManager.error, width: AppSize.s1_5),
             borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8))),
         // focused border style
-        focusedErrorBorder: OutlineInputBorder(
+        focusedErrorBorder: UnderlineInputBorder(
             borderSide:
                 BorderSide(color: ColorManager.primary, width: AppSize.s1_5),
             borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8)))),

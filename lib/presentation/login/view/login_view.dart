@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:paprika/presentation/resources/assets_manager.dart';
 
-import '../../../app/di.dart';
+//import '../../../app/di.dart';
 import '../../common/state_renderer/state_renderer_impl.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/strings_manager.dart';
@@ -16,7 +17,9 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final LoginViewModel _viewModel = instance<LoginViewModel>();
+  final LoginViewModel _viewModel = LoginViewModel();
+
+  bool switchValue = false;
 
   //final AppPreferences _appPreferences = instance<AppPreferences>();
 
@@ -53,7 +56,6 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManager.white,
       body: StreamBuilder<FlowState>(
         stream: _viewModel.outputState,
         builder: (context, snapshot) {
@@ -68,18 +70,37 @@ class _LoginViewState extends State<LoginView> {
   }
 
   Widget _getContentWidget() {
-    return Container(
-        padding: const EdgeInsets.only(top: AppPadding.p100),
-        child: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: AppPadding.p28, right: AppPadding.p28),
-                  child: StreamBuilder<bool>(
+    return SingleChildScrollView(
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            Image(
+              image: const AssetImage(ImageAssets.login),
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height / 3,
+              fit: BoxFit.fitWidth,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p28),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: AppPadding.p28),
+                    child: Text(
+                      'Welcome Back To Paprika',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineLarge
+                          ?.copyWith(color: Colors.grey),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: AppSize.s28,
+                  ),
+                  StreamBuilder<bool>(
                       stream: _viewModel.outIsEmailValid,
                       builder: (context, snapshot) {
                         return TextFormField(
@@ -93,14 +114,10 @@ class _LoginViewState extends State<LoginView> {
                                   : AppStrings.usernameError),
                         );
                       }),
-                ),
-                const SizedBox(
-                  height: AppSize.s28,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: AppPadding.p28, right: AppPadding.p28),
-                  child: StreamBuilder<bool>(
+                  const SizedBox(
+                    height: AppSize.s28,
+                  ),
+                  StreamBuilder<bool>(
                       stream: _viewModel.outIsPasswordValid,
                       builder: (context, snapshot) {
                         return TextFormField(
@@ -114,14 +131,42 @@ class _LoginViewState extends State<LoginView> {
                                   : AppStrings.passwordError),
                         );
                       }),
-                ),
-                const SizedBox(
-                  height: AppSize.s28,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: AppPadding.p28, right: AppPadding.p28),
-                  child: StreamBuilder<bool>(
+                  const SizedBox(
+                    height: AppSize.s8,
+                  ),
+                  Row(
+                    children: [
+                      Switch(
+                          value: switchValue,
+                          onChanged: (value) {
+                            setState(() {
+                              switchValue = value;
+                            });
+                          }),
+                      Text(
+                        'Remember',
+                        style: Theme.of(context)
+                            .textTheme
+                            .displaySmall
+                            ?.copyWith(color: ColorManager.darkBlue),
+                      ),
+                      const Spacer(),
+                      TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Forget Password?',
+                          style: Theme.of(context)
+                              .textTheme
+                              .displaySmall
+                              ?.copyWith(color: ColorManager.darkBlue),
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: AppSize.s8,
+                  ),
+                  StreamBuilder<bool>(
                       stream: _viewModel.outIsAllInputsValid,
                       builder: (context, snapshot) {
                         return SizedBox(
@@ -130,17 +175,20 @@ class _LoginViewState extends State<LoginView> {
                           child: ElevatedButton(
                               onPressed: (snapshot.data ?? false)
                                   ? () {
-                                      _viewModel.login();
+                                      print(snapshot.data);
+                                      //_viewModel.login();
                                     }
                                   : null,
                               child: const Text(AppStrings.login)),
                         );
                       }),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ));
+          ],
+        ),
+      ),
+    );
   }
 
   @override
