@@ -16,7 +16,7 @@ class RepositoryImpl implements Repository {
   RepositoryImpl(this._remoteDataSource, this._networkInfo);
 
   @override
-  Future<Either<Failure, User>> login(LoginRequest loginRequest) async{
+  Future<Either<Failure, User>> login(LoginRequest loginRequest) async {
     if (await _networkInfo.isConnected) {
       try {
         final response = await _remoteDataSource.login(loginRequest);
@@ -40,5 +40,29 @@ class RepositoryImpl implements Repository {
     }
   }
 
+  @override
+  Future<Either<Failure, User>> register(
+      RegisterRequest registerRequest) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _remoteDataSource.register(registerRequest);
 
+        if (response.status == true) {
+          // success
+          // return either right
+          // return data
+          return Right(response.toDomain());
+        } else {
+          // failure --return business error
+          // return either left
+          return Left(Failure(ApiInternalStatus.FAILURE,
+              response.message ?? ResponseMessage.DEFAULT));
+        }
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
 }

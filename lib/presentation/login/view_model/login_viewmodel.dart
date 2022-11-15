@@ -1,8 +1,12 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:paprika/presentation/base/base_view_model.dart';
 import 'package:paprika/presentation/common/freezed_data/freezed_data_classes.dart';
+import 'package:paprika/presentation/common/state_renderer/state_renderer.dart';
 import 'package:paprika/presentation/common/state_renderer/state_renderer_impl.dart';
+
+import '../../../domain/usecase/login_usecase.dart';
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInputs, LoginViewModelOutputs {
@@ -16,6 +20,10 @@ class LoginViewModel extends BaseViewModel
       StreamController<bool>();
 
   LoginObject loginObject = LoginObject("", "");
+
+  final LoginUseCase _loginUseCase;
+
+  LoginViewModel(this._loginUseCase);
 
   //inputs
   @override
@@ -33,23 +41,33 @@ class LoginViewModel extends BaseViewModel
   }
 
   @override
-  login() {
-    // TODO: implement login
-    throw UnimplementedError();
+  login() async {
+    inputState.add(
+        LoadingState(stateRendererType: StateRendererType.popupLoadingState));
+    (await _loginUseCase.execute(
+            LoginUseCaseInput(loginObject.userName, loginObject.password)))
+        .fold(
+            (failure) => inputState.add(ErrorState(
+                  StateRendererType.popupErrorState,
+                  failure.message,
+                )), (data) {
+      inputState.add(ContentState());
+      isUserLoggedInSuccessfullyStreamController.add(true);
+    });
   }
 
   @override
   setEmail(String email) {
     inputEmail.add(email);
     loginObject = loginObject.copyWith(userName: email);
-    _areAllInputsValidStreamController.add(null);
+    inputIsAllInputsValid.add(null);
   }
 
   @override
   setPassword(String password) {
     inputPassword.add(password);
     loginObject = loginObject.copyWith(password: password);
-    _areAllInputsValidStreamController.add(null);
+    inputIsAllInputsValid.add(null);
   }
 
   @override

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:paprika/app/di.dart';
 import 'package:paprika/presentation/resources/assets_manager.dart';
 
-//import '../../../app/di.dart';
 import '../../common/state_renderer/state_renderer_impl.dart';
 import '../../resources/color_manager.dart';
+import '../../resources/routes_manager.dart';
 import '../../resources/strings_manager.dart';
 import '../../resources/values_manager.dart';
 import '../view_model/login_viewmodel.dart';
@@ -17,7 +18,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final LoginViewModel _viewModel = LoginViewModel();
+  final LoginViewModel _viewModel = instance<LoginViewModel>();
 
   bool switchValue = false;
 
@@ -41,7 +42,7 @@ class _LoginViewState extends State<LoginView> {
         SchedulerBinding.instance.addPostFrameCallback((_) {
           //todo
           //_appPreferences.setUserLoggedIn();
-          //Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
+          Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
         });
       }
     });
@@ -175,8 +176,7 @@ class _LoginViewState extends State<LoginView> {
                           child: ElevatedButton(
                               onPressed: (snapshot.data ?? false)
                                   ? () {
-                                      print(snapshot.data);
-                                      //_viewModel.login();
+                                      _viewModel.login();
                                     }
                                   : null,
                               child: const Text(AppStrings.login)),

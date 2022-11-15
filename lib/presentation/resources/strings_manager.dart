@@ -19,6 +19,15 @@ class AppStrings {
   static const forgetPassword = "Forget Password?";
   static const registerText = "Not a member ? Sign up";
 
+  //register
+  static const invalidEmail = "Invalid Email";
+  static const nameInvalid = "Invalid User Name";
+  static const mobileNumberInvalid = "Invalid Mobile Number";
+  static const passwordInvalid = "Invalid Password";
+  static const createAccount = "Create Account";
+  static const phone = "phone";
+  static const email = "email";
+
   // error handler
   static const badRequestError = "bad_request_error";
   static const noContent = "no_content";

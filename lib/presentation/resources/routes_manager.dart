@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paprika/app/di.dart';
 import 'package:paprika/presentation/login/view/login_view.dart';
 import 'package:paprika/presentation/onboarding/view/onboarding_view.dart';
 import 'package:paprika/presentation/resources/strings_manager.dart';
@@ -24,8 +25,10 @@ class RouteGenerator {
       case Routes.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => const OnBoardingView());
       case Routes.loginRoute:
+        initLoginModule();
         return MaterialPageRoute(builder: (_) => const LoginView());
       case Routes.registerRoute:
+        initRegisterModule();
         return MaterialPageRoute(builder: (_) => const SignUpView());
       default:
         return unDefinedRoute();
