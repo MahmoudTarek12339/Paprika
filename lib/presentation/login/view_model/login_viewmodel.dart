@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:paprika/presentation/base/base_view_model.dart';
 import 'package:paprika/presentation/common/freezed_data/freezed_data_classes.dart';
 import 'package:paprika/presentation/common/state_renderer/state_renderer.dart';

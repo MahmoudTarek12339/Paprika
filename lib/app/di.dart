@@ -13,6 +13,7 @@ import '../data/repository/repository_impl.dart';
 import '../domain/repository/repository.dart';
 import '../domain/usecase/login_usecase.dart';
 import '../presentation/login/view_model/login_viewmodel.dart';
+import 'app_prefs.dart';
 
 final instance = GetIt.instance;
 
@@ -20,9 +21,8 @@ Future<void> initAppModule() async {
   final sharedPreference = await SharedPreferences.getInstance();
   instance.registerLazySingleton<SharedPreferences>(() => sharedPreference);
 
-  //todo
   // app prefs instance
-  //instance.registerLazySingleton<AppPreferences>(() => AppPreferences(instance()));
+  instance.registerLazySingleton<AppPreferences>(() => AppPreferences(instance()));
 
   // network info
   instance.registerLazySingleton<NetworkInfo>(

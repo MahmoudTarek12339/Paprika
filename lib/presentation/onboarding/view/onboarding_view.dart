@@ -32,7 +32,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(25),
                 child: Container(
-                  color: ColorManager.white.withOpacity(0.95),
+                  color: ColorManager.white.withOpacity(0.8),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -52,7 +52,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                         height: AppSize.s4,
                       ),
                       Text(
-                        'Every Time Every Where.',
+                        AppStrings.everyTimeEveryWhere,
                         style: Theme.of(context).textTheme.headlineMedium,
                         textAlign: TextAlign.center,
                       ),
@@ -61,22 +61,20 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                       ),
                       ElevatedButton(
                           onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, Routes.loginRoute);
+                            Navigator.pushNamed(context, Routes.registerRoute);
                           },
-                          child: const Text('Create Account')),
+                          child: const Text(AppStrings.createAccount)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Already have account?',
+                          Text(AppStrings.alreadyHaveAccount,
                               style:
                                   Theme.of(context).textTheme.headlineMedium),
                           TextButton(
                               onPressed: () {
-                                Navigator.pushReplacementNamed(
-                                    context, Routes.loginRoute);
+                                Navigator.pushNamed(context, Routes.loginRoute);
                               },
-                              child: const Text('Log In'))
+                              child: const Text(AppStrings.login))
                         ],
                       )
                     ],

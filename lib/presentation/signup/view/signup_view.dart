@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import '../../../app/app_prefs.dart';
 import '../../../app/di.dart';
 import '../../common/state_renderer/state_renderer_impl.dart';
 import '../../resources/assets_manager.dart';
@@ -20,8 +21,7 @@ class SignUpView extends StatefulWidget {
 class _SignUpViewState extends State<SignUpView> {
   final RegisterViewModel _viewModel = instance<RegisterViewModel>();
 
-  //todo
-  //final AppPreferences _appPreferences = instance<AppPreferences>();
+  final AppPreferences _appPreferences = instance<AppPreferences>();
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _nameEditingController = TextEditingController();
@@ -51,7 +51,7 @@ class _SignUpViewState extends State<SignUpView> {
       if (isLoggedIn) {
         // navigate to main screen
         SchedulerBinding.instance.addPostFrameCallback((_) {
-          //_appPreferences.setUserLoggedIn();
+          _appPreferences.setUserLoggedIn();
           Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
         });
       }
@@ -87,11 +87,36 @@ class _SignUpViewState extends State<SignUpView> {
         key: _formKey,
         child: Column(
           children: [
-            Image(
-              image: const AssetImage(ImageAssets.signup),
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height / 3,
-              fit: BoxFit.fitWidth,
+            Stack(
+              children: [
+                Image(
+                  image: const AssetImage(ImageAssets.signup),
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height / 3,
+                  fit: BoxFit.fitWidth,
+                ),
+                Positioned(
+                    top: AppSize.s60,
+                    left: AppSize.s20,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Row(
+                        //mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.arrow_back_ios,
+                            color: ColorManager.white,
+                          ),
+                          Text(
+                            AppStrings.back,
+                            style: Theme.of(context).textTheme.titleSmall,
+                          )
+                        ],
+                      ),
+                    )),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppPadding.p28),
@@ -99,18 +124,15 @@ class _SignUpViewState extends State<SignUpView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: AppPadding.p28),
-                    child: Text(
-                      'Let\'s Start Making \ngood Meals ',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineLarge
-                          ?.copyWith(color: Colors.grey),
-                      textAlign: TextAlign.center,
-                    ),
+                    padding: const EdgeInsets.only(top: AppPadding.p12),
+                    child: Text(AppStrings.letsStartMakingGoodMeals,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineLarge
+                            ?.copyWith(color: Colors.grey)),
                   ),
                   const SizedBox(
-                    height: AppSize.s28,
+                    height: AppSize.s8,
                   ),
                   StreamBuilder<String?>(
                       stream: _viewModel.outputErrorName,
@@ -171,7 +193,7 @@ class _SignUpViewState extends State<SignUpView> {
                         );
                       }),
                   const SizedBox(
-                    height: AppSize.s8,
+                    height: AppSize.s18,
                   ),
                   StreamBuilder<bool>(
                       stream: _viewModel.outputAreAllInputsValid,
@@ -188,6 +210,18 @@ class _SignUpViewState extends State<SignUpView> {
                               child: const Text(AppStrings.createAccount)),
                         );
                       }),
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    TextButton(
+                        onPressed: () {},
+                        child: const Text(AppStrings.termsOfUse)),
+                    Text(
+                      AppStrings.and,
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                    TextButton(
+                        onPressed: () {},
+                        child: const Text(AppStrings.privacyPolicy))
+                  ])
                 ],
               ),
             ),

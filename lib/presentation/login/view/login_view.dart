@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:paprika/app/di.dart';
 import 'package:paprika/presentation/resources/assets_manager.dart';
 
+import '../../../app/app_prefs.dart';
 import '../../common/state_renderer/state_renderer_impl.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/routes_manager.dart';
@@ -22,7 +23,7 @@ class _LoginViewState extends State<LoginView> {
 
   bool switchValue = false;
 
-  //final AppPreferences _appPreferences = instance<AppPreferences>();
+  final AppPreferences _appPreferences = instance<AppPreferences>();
 
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _userPasswordController = TextEditingController();
@@ -40,8 +41,9 @@ class _LoginViewState extends State<LoginView> {
       if (isLoggedIn) {
         // navigate to main screen
         SchedulerBinding.instance.addPostFrameCallback((_) {
-          //todo
-          //_appPreferences.setUserLoggedIn();
+          if (switchValue) {
+            _appPreferences.setUserLoggedIn();
+          }
           Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
         });
       }
@@ -76,11 +78,35 @@ class _LoginViewState extends State<LoginView> {
         key: _formKey,
         child: Column(
           children: [
-            Image(
-              image: const AssetImage(ImageAssets.login),
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height / 3,
-              fit: BoxFit.fitWidth,
+            Stack(
+              children: [
+                Image(
+                  image: const AssetImage(ImageAssets.login),
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height / 3,
+                  fit: BoxFit.fitHeight,
+                ),
+                Positioned(
+                    top: AppSize.s60,
+                    left: AppSize.s10,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.arrow_back_ios,
+                            color: ColorManager.white,
+                          ),
+                          Text(
+                            AppStrings.back,
+                            style: Theme.of(context).textTheme.titleSmall,
+                          )
+                        ],
+                      ),
+                    )),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppPadding.p28),
@@ -88,9 +114,9 @@ class _LoginViewState extends State<LoginView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: AppPadding.p28),
+                    padding: const EdgeInsets.only(top: AppPadding.p12),
                     child: Text(
-                      'Welcome Back To Paprika',
+                      AppStrings.welcomeBackToPaprika,
                       style: Theme.of(context)
                           .textTheme
                           .headlineLarge
@@ -99,7 +125,7 @@ class _LoginViewState extends State<LoginView> {
                     ),
                   ),
                   const SizedBox(
-                    height: AppSize.s28,
+                    height: AppSize.s18,
                   ),
                   StreamBuilder<bool>(
                       stream: _viewModel.outIsEmailValid,
@@ -145,7 +171,7 @@ class _LoginViewState extends State<LoginView> {
                             });
                           }),
                       Text(
-                        'Remember',
+                        AppStrings.remember,
                         style: Theme.of(context)
                             .textTheme
                             .displaySmall
@@ -155,7 +181,7 @@ class _LoginViewState extends State<LoginView> {
                       TextButton(
                         onPressed: () {},
                         child: Text(
-                          'Forget Password?',
+                          AppStrings.forgetPassword,
                           style: Theme.of(context)
                               .textTheme
                               .displaySmall

@@ -10,35 +10,48 @@ class AppStrings {
   static const ok = "ok";
   static const success = "success";
 
+  //on Boarding
+  static const everyTimeEveryWhere = "Every Time Every Where.";
+  static const createAccount = "Create Account";
+  static const login = "Login";
+  static const alreadyHaveAccount = "Already have account?";
+
   //login
   static const username = "UserName";
   static const password = "password";
   static const usernameError = "Please enter your Email";
   static const passwordError = "Please enter your Password";
-  static const login = "Login";
   static const forgetPassword = "Forget Password?";
-  static const registerText = "Not a member ? Sign up";
+  static const remember = "Remember";
+  static const back = "Back";
+  static const welcomeBackToPaprika = "Welcome Back To Paprika";
 
   //register
   static const invalidEmail = "Invalid Email";
   static const nameInvalid = "Invalid User Name";
   static const mobileNumberInvalid = "Invalid Mobile Number";
   static const passwordInvalid = "Invalid Password";
-  static const createAccount = "Create Account";
   static const phone = "phone";
   static const email = "email";
+  static const letsStartMakingGoodMeals = "Let\'s Start Making \n Good Meals ";
+  static const termsOfUse = "Terms of use";
+  static const and = "and";
+  static const privacyPolicy = "Privacy Policy";
+
+  //forget Password
+  static const emailHint = 'Email';
 
   // error handler
-  static const badRequestError = "bad_request_error";
-  static const noContent = "no_content";
-  static const forbiddenError = "forbidden_error";
-  static const unauthorizedError = "unauthorized_error";
-  static const notFoundError = "not_found_error";
-  static const conflictError = "conflict_error";
-  static const internalServerError = "internal_server_error";
-  static const unknownError = "unknown_error";
-  static const timeoutError = "timeout_error";
-  static const defaultError = "default_error";
-  static const cacheError = "cache_error";
-  static const noInternetError = "no_internet_error";
+  static const badRequestError = "bad request. try again later";
+  static const noContent = "success with not content";
+  static const forbiddenError = "forbidden request. try again later";
+  static const unauthorizedError = "user unauthorized, try again later";
+  static const notFoundError = "url not found, try again later";
+  static const conflictError = "conflict found, try again later";
+  static const internalServerError = "some thing went wrong, try again later";
+  static const unknownError = "some thing went wrong, try again later";
+  static const timeoutError = "time out, try again late";
+  static const defaultError = "some thing went wrong, try again later";
+  static const cacheError = "cache error, try again later";
+  static const noInternetError = "Please check your internet connection";
 }
