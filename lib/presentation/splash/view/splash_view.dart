@@ -6,7 +6,6 @@ import 'package:paprika/presentation/resources/values_manager.dart';
 import '../../../app/app_prefs.dart';
 import '../../../app/di.dart';
 import '../../resources/assets_manager.dart';
-import '../../resources/color_manager.dart';
 import '../../resources/constants_manager.dart';
 import '../../resources/routes_manager.dart';
 import '../../resources/strings_manager.dart';
@@ -29,7 +28,7 @@ class _SplashViewState extends State<SplashView> {
 
   _goNext() async {
     _appPreferences.isUserLoggedIn().then((isUserLoggedIn) => {
-          if (isUserLoggedIn)
+          /*if (isUserLoggedIn)
             {
               // navigate to main screen
               Navigator.pushReplacementNamed(context, Routes.mainRoute)
@@ -38,7 +37,8 @@ class _SplashViewState extends State<SplashView> {
             {
               // navigate to on boarding screen
               Navigator.pushReplacementNamed(context, Routes.onBoardingRoute)
-            }
+            }*/
+          Navigator.pushReplacementNamed(context, Routes.mainRoute)
         });
   }
 
@@ -57,14 +57,13 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManager.black,
       body: Stack(
         alignment: Alignment.center,
         children: [
-          Image(
-            image: const AssetImage(ImageAssets.splash),
+          const Image(
+            image: AssetImage(ImageAssets.splash),
             fit: BoxFit.fitHeight,
-            height: MediaQuery.of(context).size.height,
+            height: double.infinity,
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: AppPadding.p100),

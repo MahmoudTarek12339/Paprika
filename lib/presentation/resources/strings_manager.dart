@@ -21,8 +21,7 @@ class AppStrings {
   static const password = "password";
   static const usernameError = "Please enter your Email";
   static const passwordError = "Please enter your Password";
-  static const forgetPassword = "Forget Password?";
-  static const remember = "Remember";
+  static const remember = "Remember Me";
   static const back = "Back";
   static const welcomeBackToPaprika = "Welcome Back To Paprika";
 
@@ -40,6 +39,13 @@ class AppStrings {
 
   //forget Password
   static const emailHint = 'Email';
+
+  //Main View
+  static const home = 'Home';
+  static const search = 'Search';
+  static const favorites = 'Favorites';
+  static const settings = 'Settings';
+
 
   // error handler
   static const badRequestError = "bad request. try again later";

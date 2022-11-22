@@ -5,6 +5,7 @@ import 'package:paprika/presentation/onboarding/view/onboarding_view.dart';
 import 'package:paprika/presentation/resources/strings_manager.dart';
 import 'package:paprika/presentation/signup/view/signup_view.dart';
 
+import '../main/main_view/main_view.dart';
 import '../splash/view/splash_view.dart';
 
 class Routes {
@@ -30,6 +31,9 @@ class RouteGenerator {
       case Routes.registerRoute:
         initRegisterModule();
         return MaterialPageRoute(builder: (_) => const SignUpView());
+      case Routes.mainRoute:
+        //initHomeModule();
+        return MaterialPageRoute(builder: (_) => const MainView());
       default:
         return unDefinedRoute();
     }
@@ -38,10 +42,10 @@ class RouteGenerator {
   static Route<dynamic> unDefinedRoute() {
     return MaterialPageRoute(
         builder: (_) => Scaffold(
-          appBar: AppBar(
-            title: const Text(AppStrings.noRouteFound),
-          ),
-          body: const Center(child: Text(AppStrings.noRouteFound)),
-        ));
+              appBar: AppBar(
+                title: const Text(AppStrings.noRouteFound),
+              ),
+              body: const Center(child: Text(AppStrings.noRouteFound)),
+            ));
   }
 }

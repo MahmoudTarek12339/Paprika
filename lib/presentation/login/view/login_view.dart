@@ -102,7 +102,7 @@ class _LoginViewState extends State<LoginView> {
                           Text(
                             AppStrings.back,
                             style: Theme.of(context).textTheme.titleSmall,
-                          )
+                          ),
                         ],
                       ),
                     )),
@@ -177,17 +177,6 @@ class _LoginViewState extends State<LoginView> {
                             .displaySmall
                             ?.copyWith(color: ColorManager.darkBlue),
                       ),
-                      const Spacer(),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          AppStrings.forgetPassword,
-                          style: Theme.of(context)
-                              .textTheme
-                              .displaySmall
-                              ?.copyWith(color: ColorManager.darkBlue),
-                        ),
-                      )
                     ],
                   ),
                   const SizedBox(
