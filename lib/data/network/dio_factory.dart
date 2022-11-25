@@ -40,4 +40,29 @@ class DioFactory {
     }
     return dio;
   }
+
+  Future<Dio> getDio2() async {
+    Dio dio = Dio();
+    //String language = await _appPreferences.getAppLanguage();
+
+    Map<String, String> headers = {
+      CONTENT_TYPE: APPLICATION_JSON,
+    };
+
+    dio.options = BaseOptions(
+        baseUrl: Constants.baseUrl2,
+        headers: headers,
+        receiveTimeout: Constants.apiTimeOut,
+        sendTimeout: Constants.apiTimeOut);
+    if (!kReleaseMode) {
+      // its debug mode so print app logs
+      dio.interceptors.add(PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseHeader: true,
+      ));
+    }
+    return dio;
+  }
+
 }

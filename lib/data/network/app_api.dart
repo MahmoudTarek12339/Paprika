@@ -22,3 +22,19 @@ abstract class AppServiceClient {
     @Field("name") String name,
   );
 }
+@RestApi(baseUrl: Constants.baseUrl)
+abstract class AppServiceClient2 {
+  factory AppServiceClient2(Dio dio, {String baseUrl}) = _AppServiceClient2;
+
+  @POST('login')
+  Future<AuthenticationResponse> login(
+      @Field("email") String email, @Field("password") String password);
+
+  @POST('register')
+  Future<AuthenticationResponse> register(
+      @Field("email") String email,
+      @Field("password") String password,
+      @Field("phone") String phone,
+      @Field("name") String name,
+      );
+}
