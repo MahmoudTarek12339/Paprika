@@ -86,9 +86,9 @@ Map<String, dynamic> _$StepsResponseToJson(StepsResponse instance) =>
 AnalyzedInstructionsResponse _$AnalyzedInstructionsResponseFromJson(
         Map<String, dynamic> json) =>
     AnalyzedInstructionsResponse(
-      json['steps'] == null
-          ? null
-          : StepsResponse.fromJson(json['steps'] as Map<String, dynamic>),
+      (json['steps'] as List<dynamic>?)
+          ?.map((e) => StepsResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$AnalyzedInstructionsResponseToJson(
@@ -107,10 +107,10 @@ RecipeInformationResponse _$RecipeInformationResponseFromJson(
       json['cookingMinutes'] as int?,
       json['servings'] as int?,
       json['summary'] as String?,
-      json['extendedIngredients'] == null
-          ? null
-          : ExtendedIngredientsResponse.fromJson(
-              json['extendedIngredients'] as Map<String, dynamic>),
+      (json['extendedIngredients'] as List<dynamic>?)
+          ?.map((e) =>
+              ExtendedIngredientsResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
       json['analyzedInstructions'] == null
           ? null
           : AnalyzedInstructionsResponse.fromJson(

@@ -93,7 +93,7 @@ class StepsResponse {
 @JsonSerializable()
 class AnalyzedInstructionsResponse {
   @JsonKey(name: "steps")
-  StepsResponse? steps;
+  List<StepsResponse>? steps;
 
   AnalyzedInstructionsResponse(this.steps);
 
@@ -122,7 +122,7 @@ class RecipeInformationResponse {
   @JsonKey(name: "summary")
   String? summary;
   @JsonKey(name: "extendedIngredients")
-  ExtendedIngredientsResponse? extendedIngredients;
+  List<ExtendedIngredientsResponse>? extendedIngredients;
   @JsonKey(name: "analyzedInstructions")
   AnalyzedInstructionsResponse? analyzedInstructions;
 

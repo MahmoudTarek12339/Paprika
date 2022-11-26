@@ -65,4 +65,77 @@ class RepositoryImpl implements Repository {
       return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, List<RecipeData>>> getRandomData(
+      RandomRecipeRequest randomRecipeRequest) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response =
+            await _remoteDataSource.getRandomData(randomRecipeRequest);
+        // success
+        // return either right
+        // return data
+        return Right(response.toDomain());
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, RecipeData>> getRecipeInformation(int id) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _remoteDataSource.getRecipeInformation(id);
+        // success
+        // return either right
+        // return data
+        return Right(response.toDomain());
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<SearchRecipeResults>>> searchRecipe(
+      SearchRequest searchRequest) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _remoteDataSource.searchRecipe(searchRequest);
+        // success
+        // return either right
+        // return data
+        return Right(response.toDomain());
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<String>>> searchRecipeAutoComp(
+      SearchRequest searchRequest) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response =
+            await _remoteDataSource.searchRecipeAutoComp(searchRequest);
+        // success
+        // return either right
+        // return data
+        return Right(response.toDomain());
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
 }

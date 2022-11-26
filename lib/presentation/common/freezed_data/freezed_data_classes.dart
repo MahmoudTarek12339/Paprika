@@ -9,5 +9,12 @@ class LoginObject with _$LoginObject {
 
 @freezed
 class RegisterObject with _$RegisterObject {
-  factory RegisterObject(String email, String password,String phone ,String name) = _RegisterObject;
+  factory RegisterObject(
+          String email, String password, String phone, String name) =
+      _RegisterObject;
+}
+
+@freezed
+class SearchObject with _$SearchObject {
+  factory SearchObject(String query, int number) = _SearchObject;
 }

@@ -32,12 +32,14 @@ Future<void> initAppModule() async {
   instance.registerLazySingleton<DioFactory>(() => DioFactory());
 
   Dio dio = await instance<DioFactory>().getDio();
+  Dio dio2 = await instance<DioFactory>().getDio2();
 
   instance.registerLazySingleton<AppServiceClient>(() => AppServiceClient(dio));
+  instance.registerLazySingleton<AppServiceClient2>(() => AppServiceClient2(dio2));
 
   // remote data source
   instance.registerLazySingleton<RemoteDataSource>(
-      () => RemoteDataSourceImpl(instance<AppServiceClient>()));
+      () => RemoteDataSourceImpl(instance<AppServiceClient>(),instance<AppServiceClient2>()));
 
   // todo local data source
   //instance.registerLazySingleton<LocalDataSource>(() => LocalDataSourceImpl());

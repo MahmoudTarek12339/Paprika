@@ -13,3 +13,17 @@ class RegisterRequest {
 
   RegisterRequest(this.email, this.password, this.name, this.phone);
 }
+
+class RandomRecipeRequest {
+  String tags;
+  int number;
+
+  RandomRecipeRequest(this.tags, this.number);
+}
+
+class SearchRequest {
+  int number;
+  String query;
+
+  SearchRequest(this.number, this.query);
+}

@@ -103,7 +103,7 @@ class _AppServiceClient2 implements AppServiceClient2 {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://student.valuxapps.com/api/';
+    baseUrl ??= 'https://api.spoonacular.com';
   }
 
   final Dio _dio;
@@ -111,64 +111,112 @@ class _AppServiceClient2 implements AppServiceClient2 {
   String? baseUrl;
 
   @override
-  Future<AuthenticationResponse> login(
-    email,
-    password,
+  Future<RandomRecipesResponse> getRandomData(
+    number,
+    tags,
   ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = {
-      'email': email,
-      'password': password,
+    final queryParameters = <String, dynamic>{
+      r'number': number,
+      r'tags': tags,
     };
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<AuthenticationResponse>(Options(
-      method: 'POST',
+        _setStreamType<RandomRecipesResponse>(Options(
+      method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'login',
+              '/recipes/random',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AuthenticationResponse.fromJson(_result.data!);
+    final value = RandomRecipesResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<AuthenticationResponse> register(
-    email,
-    password,
-    phone,
-    name,
-  ) async {
+  Future<RecipeInformationResponse> getRecipeInformation(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = {
-      'email': email,
-      'password': password,
-      'phone': phone,
-      'name': name,
-    };
+    final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<AuthenticationResponse>(Options(
-      method: 'POST',
+        _setStreamType<RecipeInformationResponse>(Options(
+      method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'register',
+              '/recipes/:id/information',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AuthenticationResponse.fromJson(_result.data!);
+    final value = RecipeInformationResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SearchRecipesResultsResponse> searchRecipe(
+    number,
+    query,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'number': number,
+      r'query': query,
+    };
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SearchRecipesResultsResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/recipes/complexSearch',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SearchRecipesResultsResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<AutoCompRecipesResultsResponse> searchRecipeAutoComp(
+    number,
+    query,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'number': number,
+      r'query': query,
+    };
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<AutoCompRecipesResultsResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/recipes/autocomplete',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = AutoCompRecipesResultsResponse.fromJson(_result.data!);
     return value;
   }
 

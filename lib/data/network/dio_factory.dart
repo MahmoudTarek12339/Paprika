@@ -52,6 +52,7 @@ class DioFactory {
     dio.options = BaseOptions(
         baseUrl: Constants.baseUrl2,
         headers: headers,
+        queryParameters: {'apiKey':Constants.apiKey},
         receiveTimeout: Constants.apiTimeOut,
         sendTimeout: Constants.apiTimeOut);
     if (!kReleaseMode) {

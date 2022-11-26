@@ -22,19 +22,23 @@ abstract class AppServiceClient {
     @Field("name") String name,
   );
 }
-@RestApi(baseUrl: Constants.baseUrl)
+
+@RestApi(baseUrl: Constants.baseUrl2)
 abstract class AppServiceClient2 {
   factory AppServiceClient2(Dio dio, {String baseUrl}) = _AppServiceClient2;
 
-  @POST('login')
-  Future<AuthenticationResponse> login(
-      @Field("email") String email, @Field("password") String password);
+  @GET('/recipes/random')
+  Future<RandomRecipesResponse> getRandomData(
+      @Query("number") int number, @Query("tags") String tags);
 
-  @POST('register')
-  Future<AuthenticationResponse> register(
-      @Field("email") String email,
-      @Field("password") String password,
-      @Field("phone") String phone,
-      @Field("name") String name,
-      );
+  @GET('/recipes/:id/information')
+  Future<RecipeInformationResponse> getRecipeInformation(@Path("id") int id);
+
+  @GET('/recipes/complexSearch')
+  Future<SearchRecipesResultsResponse> searchRecipe(
+      @Query("number") int number, @Query("query") String query);
+  @GET('/recipes/autocomplete')
+  Future<AutoCompRecipesResultsResponse> searchRecipeAutoComp(
+      @Query("number") int number, @Query("query") String query);
+
 }
