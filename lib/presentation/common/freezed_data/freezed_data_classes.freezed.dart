@@ -346,3 +346,149 @@ abstract class _RegisterObject implements RegisterObject {
   _$RegisterObjectCopyWith<_RegisterObject> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+class _$SearchObjectTearOff {
+  const _$SearchObjectTearOff();
+
+  _SearchObject call(String query, int number) {
+    return _SearchObject(
+      query,
+      number,
+    );
+  }
+}
+
+/// @nodoc
+const $SearchObject = _$SearchObjectTearOff();
+
+/// @nodoc
+mixin _$SearchObject {
+  String get query => throw _privateConstructorUsedError;
+  int get number => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $SearchObjectCopyWith<SearchObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SearchObjectCopyWith<$Res> {
+  factory $SearchObjectCopyWith(
+          SearchObject value, $Res Function(SearchObject) then) =
+      _$SearchObjectCopyWithImpl<$Res>;
+  $Res call({String query, int number});
+}
+
+/// @nodoc
+class _$SearchObjectCopyWithImpl<$Res> implements $SearchObjectCopyWith<$Res> {
+  _$SearchObjectCopyWithImpl(this._value, this._then);
+
+  final SearchObject _value;
+  // ignore: unused_field
+  final $Res Function(SearchObject) _then;
+
+  @override
+  $Res call({
+    Object? query = freezed,
+    Object? number = freezed,
+  }) {
+    return _then(_value.copyWith(
+      query: query == freezed
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+      number: number == freezed
+          ? _value.number
+          : number // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$SearchObjectCopyWith<$Res>
+    implements $SearchObjectCopyWith<$Res> {
+  factory _$SearchObjectCopyWith(
+          _SearchObject value, $Res Function(_SearchObject) then) =
+      __$SearchObjectCopyWithImpl<$Res>;
+  @override
+  $Res call({String query, int number});
+}
+
+/// @nodoc
+class __$SearchObjectCopyWithImpl<$Res> extends _$SearchObjectCopyWithImpl<$Res>
+    implements _$SearchObjectCopyWith<$Res> {
+  __$SearchObjectCopyWithImpl(
+      _SearchObject _value, $Res Function(_SearchObject) _then)
+      : super(_value, (v) => _then(v as _SearchObject));
+
+  @override
+  _SearchObject get _value => super._value as _SearchObject;
+
+  @override
+  $Res call({
+    Object? query = freezed,
+    Object? number = freezed,
+  }) {
+    return _then(_SearchObject(
+      query == freezed
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+      number == freezed
+          ? _value.number
+          : number // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SearchObject implements _SearchObject {
+  _$_SearchObject(this.query, this.number);
+
+  @override
+  final String query;
+  @override
+  final int number;
+
+  @override
+  String toString() {
+    return 'SearchObject(query: $query, number: $number)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _SearchObject &&
+            const DeepCollectionEquality().equals(other.query, query) &&
+            const DeepCollectionEquality().equals(other.number, number));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(query),
+      const DeepCollectionEquality().hash(number));
+
+  @JsonKey(ignore: true)
+  @override
+  _$SearchObjectCopyWith<_SearchObject> get copyWith =>
+      __$SearchObjectCopyWithImpl<_SearchObject>(this, _$identity);
+}
+
+abstract class _SearchObject implements SearchObject {
+  factory _SearchObject(String query, int number) = _$_SearchObject;
+
+  @override
+  String get query;
+  @override
+  int get number;
+  @override
+  @JsonKey(ignore: true)
+  _$SearchObjectCopyWith<_SearchObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}

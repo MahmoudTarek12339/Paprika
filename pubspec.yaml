@@ -82,6 +82,13 @@ flutter:
   assets:
     - assets/images/
     - assets/json/
+    - assets/images/categories/
+    - assets/images/ingredients/condiments
+    - assets/images/ingredients/fish
+    - assets/images/ingredients/fruits
+    - assets/images/ingredients/grocery
+    - assets/images/ingredients/meat
+    - assets/images/ingredients/vegetables
 
   fonts:
     - family: Montserrat
