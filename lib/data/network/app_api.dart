@@ -37,8 +37,20 @@ abstract class AppServiceClient2 {
   @GET('/recipes/complexSearch')
   Future<SearchRecipesResultsResponse> searchRecipe(
       @Query("number") int number, @Query("query") String query);
+
   @GET('/recipes/autocomplete')
   Future<AutoCompRecipesResultsResponse> searchRecipeAutoComp(
       @Query("number") int number, @Query("query") String query);
 
+  @GET('/food/ingredients/search')
+  Future<SearchIngredientResultsResponse> searchIngredient(
+      @Query("number") int number, @Query("query") String query);
+
+  @GET('/food/ingredients/autocomplete')
+  Future<AutoCompIngredientsResultsResponse> searchIngredientAutoComp(
+      @Query("number") int number, @Query("query") String query);
+
+  @GET('/recipes/findByIngredients')
+  Future<SearchRecipesWithIngResultsResponse> searchRecipesWithIng(
+      @Query("number") int number, @Query("query") String ingredients);
 }

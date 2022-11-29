@@ -7,6 +7,8 @@ class ImageAssets {
   static const String splash = "$imagePath/splash.jpg";
   static const String onBoarding = "$imagePath/onboarding.jpg";
   static const String chefHat = "$imagePath/chef-hat.png";
+  static const String lamp = "$imagePath/lamp.png";
+  static const String settings = "$imagePath/setting.png";
   static const String login = "$imagePath/login.jpg";
   static const String signup = "$imagePath/signup.jpg";
 

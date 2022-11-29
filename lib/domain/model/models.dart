@@ -59,3 +59,22 @@ class SearchRecipeResults {
 
   SearchRecipeResults(this.id, this.title, this.image);
 }
+
+class SearchIngredientResults {
+  int id;
+  String name;
+  String image;
+
+  SearchIngredientResults(this.id, this.name, this.image);
+}
+
+class SearchRecipeWithIngResult {
+  int id;
+  int usedIngredientCount;
+  int missedIngredientCount;
+  String title;
+  String image;
+
+  SearchRecipeWithIngResult(this.id, this.title, this.image,
+      this.usedIngredientCount, this.missedIngredientCount);
+}

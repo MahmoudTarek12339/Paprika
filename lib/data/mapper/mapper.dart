@@ -119,3 +119,59 @@ extension AutoCompRecipesResultsResponseMapper
     return titles;
   }
 }
+
+extension SearchIngredientResponseMapper on SearchIngredientResponse? {
+  SearchIngredientResults toDomain() {
+    return SearchIngredientResults(
+        this?.id?.orZero() ?? Constants.zero,
+        this?.name?.orEmpty() ?? Constants.empty,
+        this?.image?.orEmpty() ?? Constants.empty);
+  }
+}
+
+extension SearchIngredientResultsResponseMapper
+    on SearchIngredientResultsResponse? {
+  List<SearchIngredientResults> toDomain() {
+    List<SearchIngredientResults> results =
+        (this?.results?.map((result) => result.toDomain()) ??
+                const Iterable.empty())
+            .cast<SearchIngredientResults>()
+            .toList();
+    return results;
+  }
+}
+
+extension SearchRecipesWithIngResponseMapper on SearchRecipesWithIngResponse? {
+  SearchRecipeWithIngResult toDomain() {
+    return SearchRecipeWithIngResult(
+        this?.id?.orZero() ?? Constants.zero,
+        this?.title?.orEmpty() ?? Constants.empty,
+        this?.image?.orEmpty() ?? Constants.empty,
+        this?.usedIngredientCount?.orZero() ?? Constants.zero,
+        this?.missedIngredientCount?.orZero() ?? Constants.zero);
+  }
+}
+
+extension SearchRecipesWithIngResultsResponseMapper
+    on SearchRecipesWithIngResultsResponse? {
+  List<SearchRecipeWithIngResult> toDomain() {
+    List<SearchRecipeWithIngResult> results =
+        (this?.results?.map((result) => result.toDomain()) ??
+                const Iterable.empty())
+            .cast<SearchRecipeWithIngResult>()
+            .toList();
+    return results;
+  }
+}
+
+extension AutoCompIngredientsResultsResponseMapper
+    on AutoCompIngredientsResultsResponse? {
+  List<SearchIngredientResults> toDomain() {
+    List<SearchIngredientResults> results =
+        (this?.titles?.map((result) => result.toDomain()) ??
+                const Iterable.empty())
+            .cast<SearchIngredientResults>()
+            .toList();
+    return results;
+  }
+}

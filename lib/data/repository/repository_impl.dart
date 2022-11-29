@@ -138,4 +138,61 @@ class RepositoryImpl implements Repository {
       return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, List<SearchIngredientResults>>> searchIngredient(
+      SearchRequest searchRequest) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response =
+            await _remoteDataSource.searchIngredient(searchRequest);
+        // success
+        // return either right
+        // return data
+        return Right(response.toDomain());
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<SearchIngredientResults>>>
+      searchIngredientAutoComp(SearchRequest searchRequest) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response =
+            await _remoteDataSource.searchIngredientAutoComp(searchRequest);
+        // success
+        // return either right
+        // return data
+        return Right(response.toDomain());
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<SearchRecipeWithIngResult>>> searchRecipeWithIng(
+      SearchWithIngRequest searchWithIngRequest) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response =
+            await _remoteDataSource.searchRecipeWithIng(searchWithIngRequest);
+        // success
+        // return either right
+        // return data
+        return Right(response.toDomain());
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
 }

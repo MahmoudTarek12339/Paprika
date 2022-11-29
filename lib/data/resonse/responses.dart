@@ -192,6 +192,81 @@ class SearchRecipesResultsResponse {
 }
 
 @JsonSerializable()
+class SearchIngredientResponse {
+  @JsonKey(name: "id")
+  int? id;
+  @JsonKey(name: "name")
+  String? name;
+  @JsonKey(name: "image")
+  String? image;
+
+  SearchIngredientResponse(this.id, this.name, this.image);
+
+  //to json
+  factory SearchIngredientResponse.fromJson(Map<String, dynamic> json) =>
+      _$SearchIngredientResponseFromJson(json);
+
+  // to json
+  Map<String, dynamic> toJson() => _$SearchIngredientResponseToJson(this);
+}
+
+@JsonSerializable()
+class SearchIngredientResultsResponse {
+  @JsonKey(name: "results")
+  List<SearchIngredientResponse>? results;
+
+  SearchIngredientResultsResponse(this.results);
+
+  //to json
+  factory SearchIngredientResultsResponse.fromJson(Map<String, dynamic> json) =>
+      _$SearchIngredientResultsResponseFromJson(json);
+
+  // to json
+  Map<String, dynamic> toJson() =>
+      _$SearchIngredientResultsResponseToJson(this);
+}
+
+@JsonSerializable()
+class SearchRecipesWithIngResponse {
+  @JsonKey(name: "id")
+  int? id;
+  @JsonKey(name: "title")
+  String? title;
+  @JsonKey(name: "image")
+  String? image;
+  @JsonKey(name: "usedIngredientCount")
+  int? usedIngredientCount;
+  @JsonKey(name: "missedIngredientCount")
+  int? missedIngredientCount;
+
+  SearchRecipesWithIngResponse(this.id, this.title, this.image,
+      this.usedIngredientCount, this.missedIngredientCount);
+
+  //to json
+  factory SearchRecipesWithIngResponse.fromJson(Map<String, dynamic> json) =>
+      _$SearchRecipesWithIngResponseFromJson(json);
+
+  // to json
+  Map<String, dynamic> toJson() => _$SearchRecipesWithIngResponseToJson(this);
+}
+
+@JsonSerializable()
+class SearchRecipesWithIngResultsResponse {
+  List<SearchRecipesWithIngResponse>? results;
+
+  SearchRecipesWithIngResultsResponse(this.results);
+
+  //to json
+  factory SearchRecipesWithIngResultsResponse.fromJson(
+          Map<String, dynamic> json) =>
+      _$SearchRecipesWithIngResultsResponseFromJson(json);
+
+  // to json
+  Map<String, dynamic> toJson() =>
+      _$SearchRecipesWithIngResultsResponseToJson(this);
+}
+
+@JsonSerializable()
 class AutoCompRecipeInfoResponse {
   @JsonKey(name: "title")
   String? title;
@@ -220,3 +295,18 @@ class AutoCompRecipesResultsResponse {
   Map<String, dynamic> toJson() => _$AutoCompRecipesResultsResponseToJson(this);
 }
 
+@JsonSerializable()
+class AutoCompIngredientsResultsResponse {
+  List<SearchIngredientResponse>? titles;
+
+  AutoCompIngredientsResultsResponse(this.titles);
+
+  //to json
+  factory AutoCompIngredientsResultsResponse.fromJson(
+          Map<String, dynamic> json) =>
+      _$AutoCompIngredientsResultsResponseFromJson(json);
+
+  // to json
+  Map<String, dynamic> toJson() =>
+      _$AutoCompIngredientsResultsResponseToJson(this);
+}

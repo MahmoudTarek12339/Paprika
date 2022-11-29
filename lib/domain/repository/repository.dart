@@ -19,4 +19,13 @@ abstract class Repository {
 
   Future<Either<Failure, List<String>>> searchRecipeAutoComp(
       SearchRequest searchRequest);
+
+  Future<Either<Failure, List<SearchIngredientResults>>> searchIngredient(
+      SearchRequest searchRequest);
+
+  Future<Either<Failure, List<SearchIngredientResults>>>
+      searchIngredientAutoComp(SearchRequest searchRequest);
+
+  Future<Either<Failure, List<SearchRecipeWithIngResult>>> searchRecipeWithIng(
+      SearchWithIngRequest searchWithIngRequest);
 }

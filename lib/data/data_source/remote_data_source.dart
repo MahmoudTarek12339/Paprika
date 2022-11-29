@@ -17,6 +17,15 @@ abstract class RemoteDataSource {
 
   Future<AutoCompRecipesResultsResponse> searchRecipeAutoComp(
       SearchRequest searchRequest);
+
+  Future<SearchIngredientResultsResponse> searchIngredient(
+      SearchRequest searchRequest);
+
+  Future<AutoCompIngredientsResultsResponse> searchIngredientAutoComp(
+      SearchRequest searchRequest);
+
+  Future<SearchRecipesWithIngResultsResponse> searchRecipeWithIng(
+      SearchWithIngRequest searchWithIngRequest);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -62,5 +71,26 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       SearchRequest searchRequest) async {
     return await _appServiceClient2.searchRecipeAutoComp(
         searchRequest.number, searchRequest.query);
+  }
+
+  @override
+  Future<SearchIngredientResultsResponse> searchIngredient(
+      SearchRequest searchRequest) async {
+    return await _appServiceClient2.searchIngredient(
+        searchRequest.number, searchRequest.query);
+  }
+
+  @override
+  Future<AutoCompIngredientsResultsResponse> searchIngredientAutoComp(
+      SearchRequest searchRequest) async {
+    return await _appServiceClient2.searchIngredientAutoComp(
+        searchRequest.number, searchRequest.query);
+  }
+
+  @override
+  Future<SearchRecipesWithIngResultsResponse> searchRecipeWithIng(
+      SearchWithIngRequest searchWithIngRequest) async {
+    return await _appServiceClient2.searchRecipesWithIng(
+        searchWithIngRequest.number, searchWithIngRequest.ingredients);
   }
 }

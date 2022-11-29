@@ -27,3 +27,10 @@ class SearchRequest {
 
   SearchRequest(this.number, this.query);
 }
+
+class SearchWithIngRequest {
+  String ingredients;
+  int number;
+
+  SearchWithIngRequest(this.ingredients, this.number);
+}

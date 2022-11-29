@@ -41,9 +41,8 @@ class AppStrings {
   static const emailHint = 'Email';
 
   //Main View
-  static const home = 'Home';
-  static const search = 'Search';
-  static const favorites = 'Favorites';
+  static const inspiration  = 'Inspiration';
+  static const recipes  = 'Recipes';
   static const settings = 'Settings';
 
 

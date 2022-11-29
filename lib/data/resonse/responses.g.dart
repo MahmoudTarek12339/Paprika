@@ -177,6 +177,72 @@ Map<String, dynamic> _$SearchRecipesResultsResponseToJson(
       'results': instance.results,
     };
 
+SearchIngredientResponse _$SearchIngredientResponseFromJson(
+        Map<String, dynamic> json) =>
+    SearchIngredientResponse(
+      json['id'] as int?,
+      json['name'] as String?,
+      json['image'] as String?,
+    );
+
+Map<String, dynamic> _$SearchIngredientResponseToJson(
+        SearchIngredientResponse instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'image': instance.image,
+    };
+
+SearchIngredientResultsResponse _$SearchIngredientResultsResponseFromJson(
+        Map<String, dynamic> json) =>
+    SearchIngredientResultsResponse(
+      (json['results'] as List<dynamic>?)
+          ?.map((e) =>
+              SearchIngredientResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$SearchIngredientResultsResponseToJson(
+        SearchIngredientResultsResponse instance) =>
+    <String, dynamic>{
+      'results': instance.results,
+    };
+
+SearchRecipesWithIngResponse _$SearchRecipesWithIngResponseFromJson(
+        Map<String, dynamic> json) =>
+    SearchRecipesWithIngResponse(
+      json['id'] as int?,
+      json['title'] as String?,
+      json['image'] as String?,
+      json['usedIngredientCount'] as int?,
+      json['missedIngredientCount'] as int?,
+    );
+
+Map<String, dynamic> _$SearchRecipesWithIngResponseToJson(
+        SearchRecipesWithIngResponse instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'image': instance.image,
+      'usedIngredientCount': instance.usedIngredientCount,
+      'missedIngredientCount': instance.missedIngredientCount,
+    };
+
+SearchRecipesWithIngResultsResponse
+    _$SearchRecipesWithIngResultsResponseFromJson(Map<String, dynamic> json) =>
+        SearchRecipesWithIngResultsResponse(
+          (json['results'] as List<dynamic>?)
+              ?.map((e) => SearchRecipesWithIngResponse.fromJson(
+                  e as Map<String, dynamic>))
+              .toList(),
+        );
+
+Map<String, dynamic> _$SearchRecipesWithIngResultsResponseToJson(
+        SearchRecipesWithIngResultsResponse instance) =>
+    <String, dynamic>{
+      'results': instance.results,
+    };
+
 AutoCompRecipeInfoResponse _$AutoCompRecipeInfoResponseFromJson(
         Map<String, dynamic> json) =>
     AutoCompRecipeInfoResponse(
@@ -200,6 +266,21 @@ AutoCompRecipesResultsResponse _$AutoCompRecipesResultsResponseFromJson(
 
 Map<String, dynamic> _$AutoCompRecipesResultsResponseToJson(
         AutoCompRecipesResultsResponse instance) =>
+    <String, dynamic>{
+      'titles': instance.titles,
+    };
+
+AutoCompIngredientsResultsResponse _$AutoCompIngredientsResultsResponseFromJson(
+        Map<String, dynamic> json) =>
+    AutoCompIngredientsResultsResponse(
+      (json['titles'] as List<dynamic>?)
+          ?.map((e) =>
+              SearchIngredientResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$AutoCompIngredientsResultsResponseToJson(
+        AutoCompIngredientsResultsResponse instance) =>
     <String, dynamic>{
       'titles': instance.titles,
     };
