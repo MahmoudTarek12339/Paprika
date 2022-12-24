@@ -39,7 +39,7 @@ class ImageAssets {
   //--fruits
   static const String apple = "$ingredientsImagePath/fruits/apple.jpg";
   static const String bananas = "$ingredientsImagePath/fruits/bananas.jpg";
-  static const String blueBerries = "$ingredientsImagePath/fruits/blueBerries.jpg";
+  static const String blueBerries = "$ingredientsImagePath/fruits/blueberries.jpg";
   static const String cherries = "$ingredientsImagePath/fruits/cherries.jpg";
   static const String dates = "$ingredientsImagePath/fruits/dates.jpg";
   static const String guava = "$ingredientsImagePath/fruits/guava.png";
@@ -67,7 +67,7 @@ class ImageAssets {
   static const String chickenBreasts = "$ingredientsImagePath/meat/chicken-breasts.png";
   static const String chickenWings = "$ingredientsImagePath/meat/chicken-wings.png";
   static const String loin = "$ingredientsImagePath/meat/loin.png";
-  static const String rips = "$ingredientsImagePath/meat/rips.png";
+  static const String rips = "$ingredientsImagePath/meat/ribs.png";
 
   //--vegetables
   static const String cabbage = "$ingredientsImagePath/vegetables/cabbage.png";
@@ -82,7 +82,7 @@ class ImageAssets {
   static const String pumpkin = "$ingredientsImagePath/vegetables/pumpkin.png";
   static const String redPepper = "$ingredientsImagePath/vegetables/red-pepper.png";
   static const String tomato = "$ingredientsImagePath/vegetables/tomato.png";
-  static const String yellowPepper = "$ingredientsImagePath/vegetables/yellow-pepper.jpg";
+  static const String yellowPepper = "$ingredientsImagePath/vegetables/yellow-bell-pepper.jpg";
 
 }
 

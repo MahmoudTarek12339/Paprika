@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:paprika/presentation/resources/values_manager.dart';
 
@@ -57,33 +58,19 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          const Image(
-            image: AssetImage(ImageAssets.splash),
-            fit: BoxFit.fitHeight,
-            height: double.infinity,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: AppPadding.p100),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  AppStrings.paprika,
-                  style: Theme.of(context).textTheme.displayLarge,
-                ),
-                const SizedBox(height: AppSize.s2),
-                Text(
-                  AppStrings.recipesWorld,
-                  style: Theme.of(context).textTheme.displayMedium,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+        body: Stack(fit: StackFit.expand, children: [
+      const Image(image: AssetImage(ImageAssets.splash), fit: BoxFit.fitHeight),
+      Padding(
+          padding: const EdgeInsets.only(bottom: AppPadding.p100),
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            AnimatedTextKit(isRepeatingAnimation: false, animatedTexts: [
+              WavyAnimatedText(AppStrings.paprika,
+                  textStyle: Theme.of(context).textTheme.displayLarge)
+            ]),
+            const SizedBox(height: AppSize.s2),
+            Text(AppStrings.recipesWorld,
+                style: Theme.of(context).textTheme.displayMedium)
+          ]))
+    ]));
   }
 }

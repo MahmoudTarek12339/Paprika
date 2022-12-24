@@ -78,3 +78,17 @@ class SearchRecipeWithIngResult {
   SearchRecipeWithIngResult(this.id, this.title, this.image,
       this.usedIngredientCount, this.missedIngredientCount);
 }
+
+class Category {
+  String name;
+  String image;
+
+  Category(this.name, this.image);
+}
+
+class Ingredient {
+  String name;
+  String image;
+
+  Ingredient(this.name, this.image);
+}

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:paprika/presentation/resources/styles_manager.dart';
 import 'package:paprika/presentation/resources/values_manager.dart';
@@ -12,7 +11,6 @@ ThemeData getApplicationTheme() {
     primaryColorLight: ColorManager.lightPrimary,
     primaryColorDark: ColorManager.darkPrimary,
     disabledColor: ColorManager.grey1,
-    splashColor: ColorManager.lightPrimary,
     cardTheme: CardTheme(
       color: ColorManager.white,
       shadowColor: ColorManager.grey,
@@ -29,8 +27,7 @@ ThemeData getApplicationTheme() {
     buttonTheme: ButtonThemeData(
         shape: const StadiumBorder(),
         disabledColor: ColorManager.grey1,
-        buttonColor: ColorManager.primary,
-        splashColor: ColorManager.lightPrimary),
+        buttonColor: ColorManager.primary),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
             textStyle: getRegularStyle(
@@ -49,25 +46,28 @@ ThemeData getApplicationTheme() {
             color: ColorManager.darkGrey, fontSize: FontSize.s24),
         headlineMedium: getSemiBoldStyle(
             color: ColorManager.lightGrey, fontSize: FontSize.s14),
-        headlineSmall: getRegularStyle(
-            color: ColorManager.lightGrey, fontSize: FontSize.s16),
+        /*headlineSmall: getRegularStyle(
+            color: ColorManager.lightGrey, fontSize: FontSize.s16),*/
         titleMedium:
-            getMediumStyle(color: ColorManager.primary, fontSize: FontSize.s16),
+            getMediumStyle(color: ColorManager.grey2, fontSize: FontSize.s18),
         titleSmall:
             getRegularStyle(color: ColorManager.white, fontSize: FontSize.s16),
-        bodyLarge: getRegularStyle(color: ColorManager.grey1),
-        bodySmall: getRegularStyle(color: ColorManager.grey),
-        bodyMedium: getRegularStyle(color: ColorManager.grey2, fontSize: FontSize.s12),
         labelSmall:
-            getBoldtStyle(color: ColorManager.primary, fontSize: FontSize.s12)),
+            getBoldtStyle(color: ColorManager.grey1, fontSize: FontSize.s12),
+        bodySmall:
+            getRegularStyle(color: ColorManager.black, fontSize: FontSize.s14),
+        bodyLarge:
+            getSemiBoldStyle(color: ColorManager.white, fontSize: FontSize.s18),
+        bodyMedium: getSemiBoldStyle(
+            color: ColorManager.lightBlack, fontSize: FontSize.s14)),
     inputDecorationTheme: InputDecorationTheme(
         // content padding
         contentPadding: const EdgeInsets.all(AppPadding.p8),
         // hint style
-        hintStyle:
-            getRegularStyle(color: ColorManager.darkBlue, fontSize: FontSize.s14),
-        labelStyle:
-            getMediumStyle(color: ColorManager.darkBlue, fontSize: FontSize.s14),
+        hintStyle: getRegularStyle(
+            color: ColorManager.darkBlue, fontSize: FontSize.s14),
+        labelStyle: getMediumStyle(
+            color: ColorManager.darkBlue, fontSize: FontSize.s14),
         errorStyle: getRegularStyle(color: ColorManager.error),
 
         // enabled border style

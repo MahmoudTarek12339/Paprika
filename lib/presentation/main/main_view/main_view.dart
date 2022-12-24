@@ -18,7 +18,7 @@ class MainView extends StatefulWidget {
 }
 
 class MainViewState extends State<MainView> {
-  List<Widget> pages = const [HomePage(), RecipesPage(), SettingsPage()];
+  List<Widget> pages = [HomePage(), RecipesPage(), SettingsPage()];
   List<String> titles = [
     AppStrings.inspiration,
     AppStrings.recipes,
