@@ -6,7 +6,7 @@ class AppStrings {
 
   //state renderer
   static const loading = "loading";
-  static const retryAgain = "retry_again";
+  static const retryAgain = "Retry Again";
   static const ok = "ok";
   static const success = "success";
 

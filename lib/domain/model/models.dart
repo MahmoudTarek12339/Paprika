@@ -16,7 +16,7 @@ class User {
 }
 
 class RecipeIngredients {
-  int amount;
+  double amount;
   String nameClean;
   String unit;
   String image;
@@ -36,12 +36,12 @@ class RecipeInformation {
   String title;
   String image;
   int aggregateLikes;
-  int cookingMinutes;
+  int readyInMinutes;
   int servings;
   String summary;
 
   RecipeInformation(this.id, this.title, this.image, this.aggregateLikes,
-      this.cookingMinutes, this.servings, this.summary);
+      this.readyInMinutes, this.servings, this.summary);
 }
 
 class RecipeData {

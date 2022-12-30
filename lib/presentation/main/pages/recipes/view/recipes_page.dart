@@ -49,7 +49,7 @@ class _RecipesPageState extends State<RecipesPage>
                 labelColor: ColorManager.darkRed,
                 labelStyle: Theme.of(context)
                     .textTheme
-                    .headlineMedium
+                    .headlineSmall
                     ?.copyWith(color: ColorManager.darkRed),
                 indicatorWeight: 3.0)),
         body: TabBarView(

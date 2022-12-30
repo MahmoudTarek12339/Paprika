@@ -32,7 +32,7 @@ class RouteGenerator {
         initRegisterModule();
         return MaterialPageRoute(builder: (_) => const SignUpView());
       case Routes.mainRoute:
-        //initHomeModule();
+        initHomeModule();
         return MaterialPageRoute(builder: (_) => const MainView());
       default:
         return unDefinedRoute();

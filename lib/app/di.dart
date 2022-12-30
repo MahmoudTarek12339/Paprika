@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:paprika/domain/usecase/home_usecase.dart';
 import 'package:paprika/domain/usecase/register_usecase.dart';
+import 'package:paprika/presentation/main/pages/home/view_model/home_viewmodel.dart';
 import 'package:paprika/presentation/signup/view_model/signup_viewmodel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -62,5 +64,12 @@ initRegisterModule() {
         .registerFactory<RegisterUseCase>(() => RegisterUseCase(instance()));
     instance.registerFactory<RegisterViewModel>(
         () => RegisterViewModel(instance()));
+  }
+}
+
+initHomeModule() {
+  if (!GetIt.I.isRegistered<HomeUseCase>()) {
+    instance.registerFactory<HomeUseCase>(() => HomeUseCase(instance()));
+    instance.registerFactory<HomePageViewModel>(() => HomePageViewModel(instance()));
   }
 }

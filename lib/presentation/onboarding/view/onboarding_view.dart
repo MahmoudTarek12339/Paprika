@@ -53,7 +53,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                       ),
                       Text(
                         AppStrings.everyTimeEveryWhere,
-                        style: Theme.of(context).textTheme.headlineMedium,
+                        style: Theme.of(context).textTheme.headlineSmall,
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(
@@ -69,7 +69,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                         children: [
                           Text(AppStrings.alreadyHaveAccount,
                               style:
-                                  Theme.of(context).textTheme.headlineMedium),
+                                  Theme.of(context).textTheme.headlineSmall),
                           TextButton(
                               onPressed: () {
                                 Navigator.pushNamed(context, Routes.loginRoute);

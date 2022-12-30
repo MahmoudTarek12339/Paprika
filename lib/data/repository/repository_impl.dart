@@ -78,6 +78,7 @@ class RepositoryImpl implements Repository {
         // return data
         return Right(response.toDomain());
       } catch (error) {
+        print(error.toString());
         return Left(ErrorHandler.handle(error).failure);
       }
     } else {

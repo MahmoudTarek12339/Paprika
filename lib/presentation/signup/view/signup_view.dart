@@ -216,7 +216,7 @@ class _SignUpViewState extends State<SignUpView> {
                         child: const Text(AppStrings.termsOfUse)),
                     Text(
                       AppStrings.and,
-                      style: Theme.of(context).textTheme.headlineMedium,
+                      style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     TextButton(
                         onPressed: () {},

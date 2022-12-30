@@ -26,7 +26,7 @@ extension AuthenticationResponseMapper on AuthenticationResponse? {
 extension ExtendedIngredientsResponseMapper on ExtendedIngredientsResponse? {
   RecipeIngredients toDomain() {
     return RecipeIngredients(
-        this?.amount.orZero() ?? Constants.zero,
+        this?.amount.orZeroD() ?? Constants.zeroD,
         this?.nameClean.orEmpty() ?? Constants.empty,
         this?.unit.orEmpty() ?? Constants.empty,
         this?.image.orEmpty() ?? Constants.empty);
@@ -58,7 +58,7 @@ extension RecipeInformationResponseMapper on RecipeInformationResponse? {
         this?.title.orEmpty() ?? Constants.empty,
         this?.image.orEmpty() ?? Constants.empty,
         this?.aggregateLikes.orZero() ?? Constants.zero,
-        this?.cookingMinutes.orZero() ?? Constants.zero,
+        this?.readyInMinutes.orZero() ?? Constants.zero,
         this?.servings.orZero() ?? Constants.zero,
         this?.summary.orEmpty() ?? Constants.empty);
     List<RecipeIngredients> recipeIngredients = (this
@@ -67,8 +67,13 @@ extension RecipeInformationResponseMapper on RecipeInformationResponse? {
             const Iterable.empty())
         .cast<RecipeIngredients>()
         .toList();
-    return RecipeData(recipeInformation, recipeIngredients,
-        this?.analyzedInstructions.toDomain());
+    return RecipeData(
+        recipeInformation,
+        recipeIngredients,
+        this?.analyzedInstructions != null &&
+                this!.analyzedInstructions!.isNotEmpty
+            ? this?.analyzedInstructions?.first.toDomain()
+            : []);
   }
 }
 

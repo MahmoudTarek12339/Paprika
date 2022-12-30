@@ -54,7 +54,7 @@ class AuthenticationResponse extends BaseResponse {
 @JsonSerializable()
 class ExtendedIngredientsResponse {
   @JsonKey(name: "amount")
-  int? amount;
+  double? amount;
   @JsonKey(name: "nameClean")
   String? nameClean;
   @JsonKey(name: "unit")
@@ -115,8 +115,8 @@ class RecipeInformationResponse {
   String? image;
   @JsonKey(name: "aggregateLikes")
   int? aggregateLikes;
-  @JsonKey(name: "cookingMinutes")
-  int? cookingMinutes;
+  @JsonKey(name: "readyInMinutes")
+  int? readyInMinutes;
   @JsonKey(name: "servings")
   int? servings;
   @JsonKey(name: "summary")
@@ -124,14 +124,14 @@ class RecipeInformationResponse {
   @JsonKey(name: "extendedIngredients")
   List<ExtendedIngredientsResponse>? extendedIngredients;
   @JsonKey(name: "analyzedInstructions")
-  AnalyzedInstructionsResponse? analyzedInstructions;
+  List<AnalyzedInstructionsResponse>? analyzedInstructions;
 
   RecipeInformationResponse(
       this.id,
       this.title,
       this.image,
       this.aggregateLikes,
-      this.cookingMinutes,
+      this.readyInMinutes,
       this.servings,
       this.summary,
       this.extendedIngredients,

@@ -56,7 +56,7 @@ Map<String, dynamic> _$AuthenticationResponseToJson(
 ExtendedIngredientsResponse _$ExtendedIngredientsResponseFromJson(
         Map<String, dynamic> json) =>
     ExtendedIngredientsResponse(
-      json['amount'] as int?,
+      (json['amount'] as num?)?.toDouble(),
       json['nameClean'] as String?,
       json['unit'] as String?,
       json['image'] as String?,
@@ -104,17 +104,17 @@ RecipeInformationResponse _$RecipeInformationResponseFromJson(
       json['title'] as String?,
       json['image'] as String?,
       json['aggregateLikes'] as int?,
-      json['cookingMinutes'] as int?,
+      json['readyInMinutes'] as int?,
       json['servings'] as int?,
       json['summary'] as String?,
       (json['extendedIngredients'] as List<dynamic>?)
           ?.map((e) =>
               ExtendedIngredientsResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
-      json['analyzedInstructions'] == null
-          ? null
-          : AnalyzedInstructionsResponse.fromJson(
-              json['analyzedInstructions'] as Map<String, dynamic>),
+      (json['analyzedInstructions'] as List<dynamic>?)
+          ?.map((e) =>
+              AnalyzedInstructionsResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$RecipeInformationResponseToJson(
@@ -124,7 +124,7 @@ Map<String, dynamic> _$RecipeInformationResponseToJson(
       'title': instance.title,
       'image': instance.image,
       'aggregateLikes': instance.aggregateLikes,
-      'cookingMinutes': instance.cookingMinutes,
+      'readyInMinutes': instance.readyInMinutes,
       'servings': instance.servings,
       'summary': instance.summary,
       'extendedIngredients': instance.extendedIngredients,
