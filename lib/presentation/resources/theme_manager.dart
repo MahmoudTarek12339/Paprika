@@ -20,7 +20,6 @@ ThemeData getApplicationTheme() {
       centerTitle: true,
       color: ColorManager.primary,
       elevation: AppSize.s4,
-      shadowColor: ColorManager.lightPrimary,
       titleTextStyle:
           getRegularStyle(fontSize: FontSize.s16, color: ColorManager.white),
     ),
@@ -36,33 +35,36 @@ ThemeData getApplicationTheme() {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(AppSize.s12)))),
     textTheme: TextTheme(
-      displayLarge: getBoldtStyle(
-          color: ColorManager.darkPrimary, fontSize: FontSize.s64),
-      displayMedium: getSemiBoldStyle(
-          color: ColorManager.lightBlack, fontSize: FontSize.s24),
-      displaySmall: getSemiBoldStyle(
-          color: ColorManager.lightBlack, fontSize: FontSize.s16),
-      headlineLarge: getSemiBoldStyle(
-          color: ColorManager.darkGrey, fontSize: FontSize.s24),
-      headlineMedium: getSemiBoldStyle(
-          color: ColorManager.lightBlack, fontSize: FontSize.s18),
-      headlineSmall: getSemiBoldStyle(
-          color: ColorManager.lightGrey, fontSize: FontSize.s14),
-      titleLarge:
-          getSemiBoldStyle(color: ColorManager.black, fontSize: FontSize.s22),
-      titleMedium:
-          getMediumStyle(color: ColorManager.grey2, fontSize: FontSize.s18),
-      titleSmall:
-          getRegularStyle(color: ColorManager.white, fontSize: FontSize.s16),
-      labelSmall:
-          getBoldtStyle(color: ColorManager.grey1, fontSize: FontSize.s12),
-      bodySmall:
-          getRegularStyle(color: ColorManager.black, fontSize: FontSize.s14),
-      bodyLarge:
-          getSemiBoldStyle(color: ColorManager.white, fontSize: FontSize.s18),
-      bodyMedium: getSemiBoldStyle(
-          color: ColorManager.lightBlack, fontSize: FontSize.s14),
-    ),
+        displayLarge: getBoldtStyle(
+            color: ColorManager.darkPrimary, fontSize: FontSize.s64),
+        displayMedium: getSemiBoldStyle(
+            color: ColorManager.lightBlack, fontSize: FontSize.s24),
+        displaySmall: getSemiBoldStyle(
+            color: ColorManager.lightBlack, fontSize: FontSize.s16),
+        headlineLarge: getSemiBoldStyle(
+            color: ColorManager.darkGrey, fontSize: FontSize.s24),
+        headlineMedium: getSemiBoldStyle(
+            color: ColorManager.lightBlack, fontSize: FontSize.s18),
+        headlineSmall: getSemiBoldStyle(
+            color: ColorManager.lightGrey, fontSize: FontSize.s14),
+        titleLarge:
+            getSemiBoldStyle(color: ColorManager.black, fontSize: FontSize.s22),
+        titleMedium:
+            getMediumStyle(color: ColorManager.grey2, fontSize: FontSize.s18),
+        titleSmall:
+            getRegularStyle(color: ColorManager.white, fontSize: FontSize.s16),
+        labelSmall:
+            getBoldtStyle(color: ColorManager.grey1, fontSize: FontSize.s12),
+        bodySmall:
+            getRegularStyle(color: ColorManager.black, fontSize: FontSize.s14),
+        bodyLarge:
+            getSemiBoldStyle(color: ColorManager.white, fontSize: FontSize.s18),
+        bodyMedium: getSemiBoldStyle(
+            color: ColorManager.lightBlack, fontSize: FontSize.s14),
+        labelMedium:
+            getSemiBoldStyle(color: ColorManager.grey, fontSize: FontSize.s14),
+        labelLarge:
+            getSemiBoldStyle(color: ColorManager.black, fontSize: FontSize.s16)),
     inputDecorationTheme: InputDecorationTheme(
         // content padding
         contentPadding: const EdgeInsets.all(AppPadding.p8),

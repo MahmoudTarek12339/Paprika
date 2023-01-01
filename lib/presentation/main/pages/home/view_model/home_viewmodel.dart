@@ -26,12 +26,12 @@ class HomePageViewModel extends BaseViewModel
   _getHomeData() async {
     inputState.add(LoadingState(
         stateRendererType: StateRendererType.fullScreenLoadingState));
-    (await _homeUseCase.execute(HomeUseCaseInput('soup', 10))).fold(
+    (await _homeUseCase.execute(HomeUseCaseInput('soup', 15))).fold(
         (failure) => inputState.add(ErrorState(
             StateRendererType.fullScreenErrorState, failure.message)),
         (forYouData) async {
       inputForYouData.add(forYouData);
-      (await _homeUseCase.execute(HomeUseCaseInput('lunch', 10))).fold(
+      (await _homeUseCase.execute(HomeUseCaseInput('lunch', 15))).fold(
           (failure2) => inputState.add(ErrorState(
               StateRendererType.fullScreenErrorState, failure2.message)),
           (masterChefData) {

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:paprika/data/data_source/local_data_source.dart';
 import 'package:paprika/domain/usecase/home_usecase.dart';
 import 'package:paprika/domain/usecase/register_usecase.dart';
 import 'package:paprika/presentation/main/pages/home/view_model/home_viewmodel.dart';
@@ -24,7 +25,8 @@ Future<void> initAppModule() async {
   instance.registerLazySingleton<SharedPreferences>(() => sharedPreference);
 
   // app prefs instance
-  instance.registerLazySingleton<AppPreferences>(() => AppPreferences(instance()));
+  instance
+      .registerLazySingleton<AppPreferences>(() => AppPreferences(instance()));
 
   // network info
   instance.registerLazySingleton<NetworkInfo>(
@@ -37,18 +39,19 @@ Future<void> initAppModule() async {
   Dio dio2 = await instance<DioFactory>().getDio2();
 
   instance.registerLazySingleton<AppServiceClient>(() => AppServiceClient(dio));
-  instance.registerLazySingleton<AppServiceClient2>(() => AppServiceClient2(dio2));
+  instance
+      .registerLazySingleton<AppServiceClient2>(() => AppServiceClient2(dio2));
 
   // remote data source
-  instance.registerLazySingleton<RemoteDataSource>(
-      () => RemoteDataSourceImpl(instance<AppServiceClient>(),instance<AppServiceClient2>()));
+  instance.registerLazySingleton<RemoteDataSource>(() => RemoteDataSourceImpl(
+      instance<AppServiceClient>(), instance<AppServiceClient2>()));
 
-  // todo local data source
-  //instance.registerLazySingleton<LocalDataSource>(() => LocalDataSourceImpl());
+  // local data source
+  instance.registerLazySingleton<LocalDataSource>(() => LocalDataSourceImpl());
 
   // repository
   instance.registerLazySingleton<Repository>(
-      () => RepositoryImpl(instance(), instance()));
+      () => RepositoryImpl(instance(), instance(), instance()));
 }
 
 initLoginModule() {
@@ -70,6 +73,7 @@ initRegisterModule() {
 initHomeModule() {
   if (!GetIt.I.isRegistered<HomeUseCase>()) {
     instance.registerFactory<HomeUseCase>(() => HomeUseCase(instance()));
-    instance.registerFactory<HomePageViewModel>(() => HomePageViewModel(instance()));
+    instance.registerFactory<HomePageViewModel>(
+        () => HomePageViewModel(instance()));
   }
 }

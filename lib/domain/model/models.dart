@@ -37,11 +37,12 @@ class RecipeInformation {
   String image;
   int aggregateLikes;
   int readyInMinutes;
+  int healthScore;
   int servings;
   String summary;
 
   RecipeInformation(this.id, this.title, this.image, this.aggregateLikes,
-      this.readyInMinutes, this.servings, this.summary);
+      this.readyInMinutes,this.healthScore, this.servings, this.summary);
 }
 
 class RecipeData {

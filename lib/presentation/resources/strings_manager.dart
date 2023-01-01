@@ -41,10 +41,16 @@ class AppStrings {
   static const emailHint = 'Email';
 
   //Main View
-  static const inspiration  = 'Inspiration';
-  static const recipes  = 'Recipes';
+  static const inspiration = 'Inspiration';
+  static const recipes = 'Recipes';
   static const settings = 'Settings';
 
+  //home
+  static const viewAll = 'View All';
+  static const masterChefChoice = 'Master Chef\'s Choice';
+  static const youMayLike = 'you May Like';
+  static const minute = 'min';
+  static const reviews = 'Reviews';
 
   // error handler
   static const badRequestError = "bad request. try again later";

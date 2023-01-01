@@ -115,7 +115,7 @@ RecipeInformationResponse _$RecipeInformationResponseFromJson(
           ?.map((e) =>
               AnalyzedInstructionsResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
-    );
+    )..healthScore = json['healthScore'] as int?;
 
 Map<String, dynamic> _$RecipeInformationResponseToJson(
         RecipeInformationResponse instance) =>
@@ -125,6 +125,7 @@ Map<String, dynamic> _$RecipeInformationResponseToJson(
       'image': instance.image,
       'aggregateLikes': instance.aggregateLikes,
       'readyInMinutes': instance.readyInMinutes,
+      'healthScore': instance.healthScore,
       'servings': instance.servings,
       'summary': instance.summary,
       'extendedIngredients': instance.extendedIngredients,

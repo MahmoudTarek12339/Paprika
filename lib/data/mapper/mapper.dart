@@ -59,6 +59,7 @@ extension RecipeInformationResponseMapper on RecipeInformationResponse? {
         this?.image.orEmpty() ?? Constants.empty,
         this?.aggregateLikes.orZero() ?? Constants.zero,
         this?.readyInMinutes.orZero() ?? Constants.zero,
+        this?.healthScore.orZero() ?? Constants.zero,
         this?.servings.orZero() ?? Constants.zero,
         this?.summary.orEmpty() ?? Constants.empty);
     List<RecipeIngredients> recipeIngredients = (this

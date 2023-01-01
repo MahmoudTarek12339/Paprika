@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:paprika/app/di.dart';
+import 'package:paprika/app/functions.dart';
 import 'package:paprika/domain/model/models.dart';
 import 'package:paprika/presentation/common/state_renderer/state_renderer_impl.dart';
 import 'package:paprika/presentation/main/pages/home/view_model/home_viewmodel.dart';
+import 'package:paprika/presentation/recipe/view/recipe_view.dart';
+import 'package:paprika/presentation/resources/assets_manager.dart';
 import 'package:paprika/presentation/resources/color_manager.dart';
+import 'package:paprika/presentation/resources/strings_manager.dart';
 import 'package:paprika/presentation/resources/values_manager.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,21 +32,27 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void dispose() {
+    _viewModel.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: ColorManager.lightBlack,
         appBar: AppBar(
             backgroundColor: ColorManager.white,
             centerTitle: false,
             titleSpacing: AppSize.s20,
-            elevation: 0,
-            title: Text('Inspiration',
+            elevation: 1,
+            title: Text(AppStrings.inspiration,
                 style: Theme.of(context)
                     .textTheme
                     .displayMedium
                     ?.copyWith(color: ColorManager.darkRed))),
         body: Center(
           child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
               child: StreamBuilder<FlowState>(
                   stream: _viewModel.outputState,
                   builder: (context, snapshot) {
@@ -57,61 +67,12 @@ class _HomePageState extends State<HomePage> {
 
   Widget _getContentWidget() {
     return Column(children: [
-      const SizedBox(height: AppSize.s5),
+      const SizedBox(height: AppSize.s8),
       _mayLikeWidget(context),
-      const SizedBox(height: AppSize.s5),
+      const SizedBox(height: AppSize.s12),
       _masterChefWidget(context)
     ]);
   }
-
-  /* Widget _trendingWidget(context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    return Container(
-        color: ColorManager.white,
-        width: width,
-        height: height * 0.3,
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Padding(
-              padding: const EdgeInsets.only(
-                  left: AppPadding.p14, top: AppPadding.p16),
-              child: Text('Trending',
-                  style: Theme.of(context).textTheme.titleLarge)),
-          SizedBox(height: height * 0.02),
-          Flexible(
-            child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8),
-                scrollDirection: Axis.horizontal,
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: _trendingItem,
-                itemCount: 5),
-          )
-        ]));
-  }
-
-  Widget _trendingItem(context, index) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    return GestureDetector(
-      onTap: (){},
-      child: Column(children: [
-        Material(
-          elevation: 2,
-          child: Container(
-              height: height * 0.16,
-              width: width * 0.35,
-              margin: const EdgeInsets.symmetric(horizontal: AppPadding.p5),
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(AppSize.s8),
-                  child: const Image(
-                      image: AssetImage(ImageAssets.soup), fit: BoxFit.cover))),
-        ),
-        const SizedBox(height: AppSize.s8),
-        Text('Easy Dishes', style: Theme.of(context).textTheme.headlineMedium)
-      ]),
-    );
-  }
-*/
 
   Widget _mayLikeWidget(context) {
     double height = MediaQuery.of(context).size.height;
@@ -123,7 +84,7 @@ class _HomePageState extends State<HomePage> {
             return Container(
                 color: ColorManager.white,
                 width: width,
-                height: height * 0.34,
+                height: height * 0.38,
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -136,16 +97,17 @@ class _HomePageState extends State<HomePage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('You May Like',
+                                Text(AppStrings.youMayLike,
                                     style:
                                         Theme.of(context).textTheme.titleLarge),
                                 GestureDetector(
                                   onTap: () {},
-                                  child: Text('View All',
+                                  child: Text(AppStrings.viewAll,
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleMedium
-                                          ?.copyWith(color: ColorManager.red)),
+                                          ?.copyWith(
+                                              color: ColorManager.darkRed)),
                                 )
                               ])),
                       SizedBox(height: height * 0.02),
@@ -155,9 +117,9 @@ class _HomePageState extends State<HomePage> {
                                   horizontal: AppPadding.p8),
                               scrollDirection: Axis.horizontal,
                               physics: const BouncingScrollPhysics(),
-                              itemBuilder: (context, index) =>
-                                  _mayLikeItem(context, snapShot.data![index]),
-                              itemCount: snapShot.data!.length))
+                              itemBuilder: (context, index) => _mayLikeItem(
+                                  context, snapShot.data![index], index),
+                              itemCount: (snapShot.data!.length) - 5))
                     ]));
           } else {
             return const SizedBox.shrink();
@@ -165,28 +127,39 @@ class _HomePageState extends State<HomePage> {
         });
   }
 
-  Widget _mayLikeItem(context, RecipeData recipe) {
+  Widget _mayLikeItem(context, RecipeData recipe, index) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return GestureDetector(
-        onTap: () {},
+        onTap: () {
+          //navigate to next page with fade animation
+          Navigator.of(context).push(PageRouteBuilder(
+              transitionDuration: const Duration(milliseconds: 700),
+              reverseTransitionDuration: const Duration(milliseconds: 500),
+              pageBuilder: (context, animation, secondaryAnimation) {
+                return FadeTransition(
+                    opacity: animation,
+                    child: RecipeView(recipe, 'soup +$index'));
+              })); //here we reset image scale again
+
+          /*Navigator.pushNamed(context, Routes.recipeDetails,
+              arguments: {'recipe': recipe, 'tag': 'soup +$index'});*/
+        },
         child: SizedBox(
             width: width * 0.4,
             child: Column(children: [
-              Material(
-                  borderRadius: BorderRadius.circular(AppSize.s8),
-                  color: ColorManager.transparent,
-                  elevation: 2,
-                  child: Container(
-                      height: height * 0.15,
-                      margin:
-                          const EdgeInsets.symmetric(horizontal: AppPadding.p5),
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(AppSize.s8),
-                          child: Image(
-                              image:
-                                  NetworkImage(recipe.recipeInformation!.image),
-                              fit: BoxFit.cover)))),
+              Padding(
+                padding: const EdgeInsets.all(AppPadding.p5),
+                child: Material(
+                    borderRadius: BorderRadius.circular(AppSize.s8),
+                    elevation: 2,
+                    child: SizedBox(
+                        height: height * 0.18,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(AppSize.s8),
+                            child: _imageWidget(recipe.recipeInformation!.image,
+                                'soup +$index')))),
+              ),
               const SizedBox(height: AppSize.s8),
               Flexible(
                   child: Padding(
@@ -238,25 +211,26 @@ class _HomePageState extends State<HomePage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Master Chef\'s Choice',
+                                Text(AppStrings.masterChefChoice,
                                     style:
                                         Theme.of(context).textTheme.titleLarge),
                                 GestureDetector(
                                   onTap: () {},
-                                  child: Text('View All',
+                                  child: Text(AppStrings.viewAll,
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleMedium
-                                          ?.copyWith(color: ColorManager.red)),
+                                          ?.copyWith(
+                                              color: ColorManager.darkRed)),
                                 )
                               ])),
                       const SizedBox(height: AppSize.s20),
                       ListView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemBuilder: (context, index) =>
-                              _masterChefItem(context, snapShot.data![index]),
-                          itemCount: snapShot.data?.length)
+                          itemBuilder: (context, index) => _masterChefItem(
+                              context, index, snapShot.data![index]),
+                          itemCount: (snapShot.data!.length) - 5)
                     ]));
           } else {
             return const SizedBox.shrink();
@@ -264,13 +238,26 @@ class _HomePageState extends State<HomePage> {
         });
   }
 
-  Widget _masterChefItem(context, RecipeData? recipe) {
+  Widget _masterChefItem(context, index, RecipeData? recipe) {
     double height = MediaQuery.of(context).size.height;
     if (recipe != null) {
       return Padding(
           padding: const EdgeInsets.all(AppPadding.p14),
           child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(PageRouteBuilder(
+                    transitionDuration: const Duration(milliseconds: 700),
+                    reverseTransitionDuration:
+                        const Duration(milliseconds: 500),
+                    pageBuilder: (context, animation, secondaryAnimation) {
+                      return FadeTransition(
+                          opacity: animation,
+                          child: RecipeView(recipe, 'lunch+$index'));
+                    })); //here we reset image scale again
+/*  Navigator.pushNamed(context, Routes.recipeDetails,
+                    arguments: {'recipe': recipe, 'tag': 'lunch+$index'});
+              */
+              },
               child: Material(
                   elevation: 10,
                   borderRadius: BorderRadius.circular(AppSize.s12),
@@ -287,10 +274,9 @@ class _HomePageState extends State<HomePage> {
                             SizedBox(
                                 height: height * 0.25,
                                 width: double.infinity,
-                                child: Image(
-                                    image: NetworkImage(
-                                        recipe.recipeInformation!.image),
-                                    fit: BoxFit.fitWidth)),
+                                child: _imageWidget(
+                                    recipe.recipeInformation!.image,
+                                    'lunch+$index')),
                             const SizedBox(height: AppSize.s24),
                             Padding(
                                 padding: const EdgeInsets.symmetric(
@@ -323,7 +309,7 @@ class _HomePageState extends State<HomePage> {
                                               )),
                                       const SizedBox(width: AppSize.s4),
                                       Text(
-                                          '${recipe.recipeInformation!.aggregateLikes} Reviews'),
+                                          '${recipe.recipeInformation!.aggregateLikes} ${AppStrings.reviews}'),
                                       const SizedBox(width: AppSize.s16),
                                       Icon(
                                         Icons.timer_outlined,
@@ -332,11 +318,28 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       const SizedBox(width: AppSize.s4),
                                       Text(
-                                          '${recipe.recipeInformation!.readyInMinutes} min')
+                                          '${recipe.recipeInformation!.readyInMinutes} ${AppStrings.minute}')
                                     ]))
                           ])))));
     } else {
       return const SizedBox.shrink();
     }
+  }
+
+  Widget _imageWidget(String recipeImage, String tag) {
+    return heroWidget(
+        tag,
+        Image(
+            fit: BoxFit.cover,
+            image: NetworkImage(recipeImage),
+            loadingBuilder: (context, widget, progress) {
+              if (progress == null) return widget;
+              return Center(
+                  child: CircularProgressIndicator(color: ColorManager.black));
+            },
+            errorBuilder: (context, object, _) {
+              return const Image(
+                  fit: BoxFit.cover, image: AssetImage(ImageAssets.lunch));
+            }));
   }
 }

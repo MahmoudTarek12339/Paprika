@@ -117,6 +117,8 @@ class RecipeInformationResponse {
   int? aggregateLikes;
   @JsonKey(name: "readyInMinutes")
   int? readyInMinutes;
+  @JsonKey(name: "healthScore")
+  int? healthScore;
   @JsonKey(name: "servings")
   int? servings;
   @JsonKey(name: "summary")
