@@ -120,7 +120,7 @@ class _RecipeViewState extends State<RecipeView>
                 Text(
                     '${widget.recipe!.recipeInformation!.aggregateLikes} ${AppStrings.reviews}'),
                 const Spacer(),
-                const Text('By John Doe')
+                const Text(AppStrings.byJohnDoe)
               ])
             ])));
   }
@@ -134,7 +134,7 @@ class _RecipeViewState extends State<RecipeView>
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Column(children: [
-                    Text('Time',
+                    Text(AppStrings.time,
                         style: Theme.of(context).textTheme.headlineSmall),
                     const SizedBox(height: AppSize.s4),
                     Text(
@@ -147,7 +147,7 @@ class _RecipeViewState extends State<RecipeView>
                   Container(
                       height: 35, width: 1, color: ColorManager.lightGrey),
                   Column(children: [
-                    Text('Calories',
+                    Text(AppStrings.calories,
                         style: Theme.of(context).textTheme.headlineSmall),
                     const SizedBox(height: AppSize.s4),
                     Text('${widget.recipe!.recipeInformation!.healthScore}',
@@ -159,7 +159,7 @@ class _RecipeViewState extends State<RecipeView>
                   Container(
                       height: 25, width: 1, color: ColorManager.lightGrey),
                   Column(children: [
-                    Text('Servings',
+                    Text(AppStrings.servings,
                         style: Theme.of(context).textTheme.headlineSmall),
                     const SizedBox(height: AppSize.s4),
                     Text('${widget.recipe!.recipeInformation!.servings}',
@@ -181,7 +181,7 @@ class _RecipeViewState extends State<RecipeView>
         padding: const EdgeInsets.all(AppPadding.p14),
         child: ReadMoreText(text,
             trimLines: 4,
-            trimExpandedText: '... show less',
+            trimExpandedText: AppStrings.showLess,
             lessStyle: Theme.of(context)
                 .textTheme
                 .headlineSmall!
@@ -202,7 +202,7 @@ class _RecipeViewState extends State<RecipeView>
         child: Column(children: [
           TabBar(
               controller: _tabController,
-              tabs: const [Tab(text: 'Ingredients'), Tab(text: 'Directions')],
+              tabs: const [Tab(text: AppStrings.ingredients), Tab(text: AppStrings.directions)],
               unselectedLabelColor: ColorManager.grey,
               indicatorColor: ColorManager.darkRed,
               labelColor: ColorManager.darkRed,
@@ -308,18 +308,18 @@ class _RecipeViewState extends State<RecipeView>
               },
               style: ElevatedButton.styleFrom(
                   elevation: 5.0,
-                  primary: ColorManager.darkRed,
+                  backgroundColor: ColorManager.darkRed,
                   fixedSize: Size(size.width, size.height * 0.07),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(AppSize.s8))),
-              child: const Text('Go Step by Step')),
+              child: const Text(AppStrings.goStepByStep)),
         )
       ]);
     }
     else {
       return Center(
         child: Text(
-            'No Available Steps',
+            AppStrings.noAvailableSteps,
           style: Theme.of(context).textTheme.titleLarge,
         ),
       );
@@ -331,7 +331,7 @@ class _RecipeViewState extends State<RecipeView>
     return Padding(
         padding: const EdgeInsets.all(AppPadding.p12),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text('Step ${widget.recipe!.recipeSteps![index].number}',
+          Text('${AppStrings.step} ${widget.recipe!.recipeSteps![index].number}',
               style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: AppSize.s8),
           Text(widget.recipe!.recipeSteps![index].step,

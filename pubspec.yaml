@@ -55,6 +55,7 @@ dependencies:
   animated_text_kit: ^4.2.2
   flutter_rating_bar: ^4.0.1
   readmore: ^2.2.0
+  substring_highlight: ^1.0.33
 
 
 

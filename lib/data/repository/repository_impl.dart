@@ -84,7 +84,8 @@ class RepositoryImpl implements Repository {
               await _remoteDataSource.getRandomData(randomRecipeRequest);
           // success
           // return data
-          _localDataSource.saveHomeToCache(response, randomRecipeRequest.tags == 'soup');
+          _localDataSource.saveHomeToCache(
+              response, randomRecipeRequest.tags == 'soup');
           return Right(response.toDomain());
         } catch (error) {
           return Left(ErrorHandler.handle(error).failure);
@@ -140,7 +141,9 @@ class RepositoryImpl implements Repository {
         // success
         // return either right
         // return data
-        return Right(response.toDomain());
+        List<String> recipes =
+            response.map((recipe) => recipe.toDomain()).toList();
+        return Right(recipes);
       } catch (error) {
         return Left(ErrorHandler.handle(error).failure);
       }
@@ -178,7 +181,9 @@ class RepositoryImpl implements Repository {
         // success
         // return either right
         // return data
-        return Right(response.toDomain());
+        List<SearchIngredientResults> ingredients =
+            response.map((ingredient) => ingredient.toDomain()).toList();
+        return Right(ingredients);
       } catch (error) {
         return Left(ErrorHandler.handle(error).failure);
       }
@@ -197,7 +202,9 @@ class RepositoryImpl implements Repository {
         // success
         // return either right
         // return data
-        return Right(response.toDomain());
+        List<SearchRecipeWithIngResult> recipes =
+            response.map((recipe) => recipe.toDomain()).toList();
+        return Right(recipes);
       } catch (error) {
         return Left(ErrorHandler.handle(error).failure);
       }

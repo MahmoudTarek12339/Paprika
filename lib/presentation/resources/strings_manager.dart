@@ -32,7 +32,7 @@ class AppStrings {
   static const passwordInvalid = "Invalid Password";
   static const phone = "phone";
   static const email = "email";
-  static const letsStartMakingGoodMeals = "Let\'s Start Making \n Good Meals ";
+  static const letsStartMakingGoodMeals = "Let's Start Making \n Good Meals ";
   static const termsOfUse = "Terms of use";
   static const and = "and";
   static const privacyPolicy = "Privacy Policy";
@@ -51,6 +51,41 @@ class AppStrings {
   static const youMayLike = 'you May Like';
   static const minute = 'min';
   static const reviews = 'Reviews';
+
+  //recipe
+  static const step = 'Step';
+  static const time = 'Time';
+  static const calories = 'Calories';
+  static const servings = 'Servings';
+  static const ingredients = 'Ingredients';
+  static const directions = 'Directions';
+  static const showLess = '... show less';
+  static const byJohnDoe = 'By John Doe';
+  static const goStepByStep = 'Go Step by Step';
+  static const noAvailableSteps = 'No Available Steps';
+
+  // search Recipe results
+  static const searchResults = 'Search Results';
+  static const noResultFound = 'No Result Found';
+
+  // Search Ingredients
+  static const searchIngredients = 'Search Ingredients';
+
+  // Search Recipes
+  static const searchRecipe = 'Search Recipe';
+
+  // steps
+  static const steps = 'Steps';
+  static const completed = '% Completed';
+  static const nextStep = 'Next Step';
+  static const finish = 'Finish';
+
+  // ingredients
+  static const clearList = 'Clear List';
+
+  // ingredient recipes results
+  static const usedIngredients = ' Used Ingredients';
+  static const missedIngredients = ' Missed Ingredients';
 
   // error handler
   static const badRequestError = "bad request. try again later";

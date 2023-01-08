@@ -90,6 +90,6 @@ class Category {
 class Ingredient {
   String name;
   String image;
-
-  Ingredient(this.name, this.image);
+  bool isNetwork;
+  Ingredient(this.name, this.image,this.isNetwork);
 }

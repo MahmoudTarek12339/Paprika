@@ -31,7 +31,7 @@ ThemeData getApplicationTheme() {
         style: ElevatedButton.styleFrom(
             textStyle: getRegularStyle(
                 color: ColorManager.white, fontSize: FontSize.s18),
-            primary: ColorManager.darkPrimary,
+            backgroundColor: ColorManager.darkPrimary,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(AppSize.s12)))),
     textTheme: TextTheme(
@@ -65,37 +65,5 @@ ThemeData getApplicationTheme() {
             getSemiBoldStyle(color: ColorManager.grey, fontSize: FontSize.s14),
         labelLarge:
             getSemiBoldStyle(color: ColorManager.black, fontSize: FontSize.s16)),
-    inputDecorationTheme: InputDecorationTheme(
-        // content padding
-        contentPadding: const EdgeInsets.all(AppPadding.p8),
-        // hint style
-        hintStyle: getRegularStyle(
-            color: ColorManager.darkBlue, fontSize: FontSize.s14),
-        labelStyle: getMediumStyle(
-            color: ColorManager.darkBlue, fontSize: FontSize.s14),
-        errorStyle: getRegularStyle(color: ColorManager.error),
-
-        // enabled border style
-        enabledBorder: UnderlineInputBorder(
-            borderSide:
-                BorderSide(color: ColorManager.grey, width: AppSize.s1_5),
-            borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8))),
-
-        // focused border style
-        focusedBorder: UnderlineInputBorder(
-            borderSide:
-                BorderSide(color: ColorManager.primary, width: AppSize.s1_5),
-            borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8))),
-
-        // error border style
-        errorBorder: UnderlineInputBorder(
-            borderSide:
-                BorderSide(color: ColorManager.error, width: AppSize.s1_5),
-            borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8))),
-        // focused border style
-        focusedErrorBorder: UnderlineInputBorder(
-            borderSide:
-                BorderSide(color: ColorManager.primary, width: AppSize.s1_5),
-            borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8)))),
   );
 }

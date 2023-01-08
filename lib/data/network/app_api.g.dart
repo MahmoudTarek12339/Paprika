@@ -153,7 +153,7 @@ class _AppServiceClient2 implements AppServiceClient2 {
     )
             .compose(
               _dio.options,
-              '/recipes/:id/information',
+              '/recipes/$id/information',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -192,7 +192,7 @@ class _AppServiceClient2 implements AppServiceClient2 {
   }
 
   @override
-  Future<AutoCompRecipesResultsResponse> searchRecipeAutoComp(
+  Future<List<AutoCompRecipeInfoResponse>> searchRecipeAutoComp(
     number,
     query,
   ) async {
@@ -203,8 +203,8 @@ class _AppServiceClient2 implements AppServiceClient2 {
     };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<AutoCompRecipesResultsResponse>(Options(
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<AutoCompRecipeInfoResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -216,7 +216,10 @@ class _AppServiceClient2 implements AppServiceClient2 {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AutoCompRecipesResultsResponse.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) =>
+            AutoCompRecipeInfoResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
@@ -250,7 +253,7 @@ class _AppServiceClient2 implements AppServiceClient2 {
   }
 
   @override
-  Future<AutoCompIngredientsResultsResponse> searchIngredientAutoComp(
+  Future<List<SearchIngredientResponse>> searchIngredientAutoComp(
     number,
     query,
   ) async {
@@ -261,8 +264,8 @@ class _AppServiceClient2 implements AppServiceClient2 {
     };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<AutoCompIngredientsResultsResponse>(Options(
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<SearchIngredientResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -274,24 +277,27 @@ class _AppServiceClient2 implements AppServiceClient2 {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AutoCompIngredientsResultsResponse.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) =>
+            SearchIngredientResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
   @override
-  Future<SearchRecipesWithIngResultsResponse> searchRecipesWithIng(
+  Future<List<SearchRecipesWithIngResponse>> searchRecipesWithIng(
     number,
     ingredients,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'number': number,
-      r'query': ingredients,
+      r'ingredients': ingredients,
     };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<SearchRecipesWithIngResultsResponse>(Options(
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<SearchRecipesWithIngResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -303,7 +309,10 @@ class _AppServiceClient2 implements AppServiceClient2 {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = SearchRecipesWithIngResultsResponse.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) =>
+            SearchRecipesWithIngResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 

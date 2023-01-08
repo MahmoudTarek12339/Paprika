@@ -5,9 +5,9 @@ import 'package:paprika/app/functions.dart';
 import 'package:paprika/domain/model/models.dart';
 import 'package:paprika/presentation/common/state_renderer/state_renderer_impl.dart';
 import 'package:paprika/presentation/main/pages/home/view_model/home_viewmodel.dart';
-import 'package:paprika/presentation/recipe/view/recipe_view.dart';
 import 'package:paprika/presentation/resources/assets_manager.dart';
 import 'package:paprika/presentation/resources/color_manager.dart';
+import 'package:paprika/presentation/resources/routes_manager.dart';
 import 'package:paprika/presentation/resources/strings_manager.dart';
 import 'package:paprika/presentation/resources/values_manager.dart';
 
@@ -40,7 +40,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
+        body: NestedScrollView(
+      headerSliverBuilder: (context, innerBoxIsScrolled) => [
+        SliverAppBar(
             backgroundColor: ColorManager.white,
             centerTitle: false,
             titleSpacing: AppSize.s20,
@@ -49,20 +51,22 @@ class _HomePageState extends State<HomePage> {
                 style: Theme.of(context)
                     .textTheme
                     .displayMedium
-                    ?.copyWith(color: ColorManager.darkRed))),
-        body: Center(
-          child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: StreamBuilder<FlowState>(
-                  stream: _viewModel.outputState,
-                  builder: (context, snapshot) {
-                    return snapshot.data
-                            ?.getScreenWidget(context, _getContentWidget(), () {
-                          _viewModel.start();
-                        }) ??
-                        _getContentWidget();
-                  })),
-        ));
+                    ?.copyWith(color: ColorManager.darkRed)))
+      ],
+      body: Center(
+        child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: StreamBuilder<FlowState>(
+                stream: _viewModel.outputState,
+                builder: (context, snapshot) {
+                  return snapshot.data
+                          ?.getScreenWidget(context, _getContentWidget(), () {
+                        _viewModel.start();
+                      }) ??
+                      _getContentWidget();
+                })),
+      ),
+    ));
   }
 
   Widget _getContentWidget() {
@@ -133,17 +137,8 @@ class _HomePageState extends State<HomePage> {
     return GestureDetector(
         onTap: () {
           //navigate to next page with fade animation
-          Navigator.of(context).push(PageRouteBuilder(
-              transitionDuration: const Duration(milliseconds: 700),
-              reverseTransitionDuration: const Duration(milliseconds: 500),
-              pageBuilder: (context, animation, secondaryAnimation) {
-                return FadeTransition(
-                    opacity: animation,
-                    child: RecipeView(recipe, 'soup +$index'));
-              })); //here we reset image scale again
-
-          /*Navigator.pushNamed(context, Routes.recipeDetails,
-              arguments: {'recipe': recipe, 'tag': 'soup +$index'});*/
+          Navigator.pushNamed(context, Routes.recipeDetails,
+              arguments: {'recipe': recipe, 'tag': 'soup +$index'});
         },
         child: SizedBox(
             width: width * 0.4,
@@ -177,9 +172,10 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         RatingBarIndicator(
                             itemCount: 5,
-                            rating:
-                                (recipe.recipeInformation!.aggregateLikes / 5) %
-                                    5,
+                            rating: ((recipe.recipeInformation!.aggregateLikes /
+                                        5) %
+                                    5)
+                                .ceilToDouble(),
                             itemSize: AppSize.s16,
                             itemBuilder: (context, index) => const Icon(
                                 Icons.star,
@@ -245,18 +241,8 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.all(AppPadding.p14),
           child: GestureDetector(
               onTap: () {
-                Navigator.of(context).push(PageRouteBuilder(
-                    transitionDuration: const Duration(milliseconds: 700),
-                    reverseTransitionDuration:
-                        const Duration(milliseconds: 500),
-                    pageBuilder: (context, animation, secondaryAnimation) {
-                      return FadeTransition(
-                          opacity: animation,
-                          child: RecipeView(recipe, 'lunch+$index'));
-                    })); //here we reset image scale again
-/*  Navigator.pushNamed(context, Routes.recipeDetails,
+                Navigator.pushNamed(context, Routes.recipeDetails,
                     arguments: {'recipe': recipe, 'tag': 'lunch+$index'});
-              */
               },
               child: Material(
                   elevation: 10,
@@ -297,10 +283,11 @@ class _HomePageState extends State<HomePage> {
                                     children: [
                                       RatingBarIndicator(
                                           itemCount: 5,
-                                          rating: (recipe.recipeInformation!
-                                                      .aggregateLikes /
-                                                  5.0) %
-                                              5,
+                                          rating: ((recipe.recipeInformation!
+                                                          .aggregateLikes /
+                                                      5) %
+                                                  5)
+                                              .ceilToDouble(),
                                           itemSize: AppSize.s16,
                                           itemBuilder: (context, index) =>
                                               const Icon(

@@ -229,21 +229,6 @@ Map<String, dynamic> _$SearchRecipesWithIngResponseToJson(
       'missedIngredientCount': instance.missedIngredientCount,
     };
 
-SearchRecipesWithIngResultsResponse
-    _$SearchRecipesWithIngResultsResponseFromJson(Map<String, dynamic> json) =>
-        SearchRecipesWithIngResultsResponse(
-          (json['results'] as List<dynamic>?)
-              ?.map((e) => SearchRecipesWithIngResponse.fromJson(
-                  e as Map<String, dynamic>))
-              .toList(),
-        );
-
-Map<String, dynamic> _$SearchRecipesWithIngResultsResponseToJson(
-        SearchRecipesWithIngResultsResponse instance) =>
-    <String, dynamic>{
-      'results': instance.results,
-    };
-
 AutoCompRecipeInfoResponse _$AutoCompRecipeInfoResponseFromJson(
         Map<String, dynamic> json) =>
     AutoCompRecipeInfoResponse(
@@ -254,34 +239,4 @@ Map<String, dynamic> _$AutoCompRecipeInfoResponseToJson(
         AutoCompRecipeInfoResponse instance) =>
     <String, dynamic>{
       'title': instance.title,
-    };
-
-AutoCompRecipesResultsResponse _$AutoCompRecipesResultsResponseFromJson(
-        Map<String, dynamic> json) =>
-    AutoCompRecipesResultsResponse(
-      (json['titles'] as List<dynamic>?)
-          ?.map((e) =>
-              AutoCompRecipeInfoResponse.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
-Map<String, dynamic> _$AutoCompRecipesResultsResponseToJson(
-        AutoCompRecipesResultsResponse instance) =>
-    <String, dynamic>{
-      'titles': instance.titles,
-    };
-
-AutoCompIngredientsResultsResponse _$AutoCompIngredientsResultsResponseFromJson(
-        Map<String, dynamic> json) =>
-    AutoCompIngredientsResultsResponse(
-      (json['titles'] as List<dynamic>?)
-          ?.map((e) =>
-              SearchIngredientResponse.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
-Map<String, dynamic> _$AutoCompIngredientsResultsResponseToJson(
-        AutoCompIngredientsResultsResponse instance) =>
-    <String, dynamic>{
-      'titles': instance.titles,
     };

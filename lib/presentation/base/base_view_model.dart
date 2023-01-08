@@ -38,7 +38,8 @@ abstract class BaseViewModel extends BaseViewModelInputs
   @override
   void updateIngredients(Ingredient ingredient) {
     if (_ingredients
-        .where((element) => element.name == ingredient.name)
+        .where((element) =>
+            element.name.toLowerCase() == ingredient.name.toLowerCase())
         .isEmpty) {
       _ingredients.add(ingredient);
     } else {
@@ -48,9 +49,14 @@ abstract class BaseViewModel extends BaseViewModelInputs
   }
 
   @override
-  void clearIngredients(){
+  void clearIngredients() {
     _ingredients.clear();
     inputIngredient.add(_ingredients);
+  }
+
+  @override
+  List<Ingredient> getIngredients() {
+    return _ingredients;
   }
 }
 
@@ -62,6 +68,8 @@ abstract class BaseViewModelInputs {
   void updateIngredients(Ingredient ingredient);
 
   void clearIngredients();
+
+  List<Ingredient> getIngredients();
 
   Sink get inputState;
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:paprika/presentation/main/pages/recipes/tabs/categories/view/categories_tab.dart';
 import 'package:paprika/presentation/main/pages/recipes/tabs/ingredients/view/ingredients_tab.dart';
 import 'package:paprika/presentation/resources/color_manager.dart';
+import 'package:paprika/presentation/resources/strings_manager.dart';
 import 'package:paprika/presentation/resources/values_manager.dart';
 
 class RecipesPage extends StatefulWidget {
@@ -35,7 +36,7 @@ class _RecipesPageState extends State<RecipesPage>
             centerTitle: false,
             titleSpacing: AppSize.s20,
             elevation: 0,
-            title: Text('Paprika',
+            title: Text(AppStrings.paprika,
                 style: Theme.of(context)
                     .textTheme
                     .displayMedium
@@ -45,7 +46,7 @@ class _RecipesPageState extends State<RecipesPage>
                 tabs: const [Tab(text: 'CATEGORIES'), Tab(text: 'INGREDIENTS')],
                 unselectedLabelColor: ColorManager.grey,
                 indicatorColor: ColorManager.darkRed,
-                indicatorPadding: EdgeInsets.symmetric(horizontal: 70),
+                indicatorPadding: const EdgeInsets.symmetric(horizontal: 70),
                 labelColor: ColorManager.darkRed,
                 labelStyle: Theme.of(context)
                     .textTheme
@@ -54,7 +55,6 @@ class _RecipesPageState extends State<RecipesPage>
                 indicatorWeight: 3.0)),
         body: TabBarView(
             controller: _tabController,
-            physics: const NeverScrollableScrollPhysics(),
             children: [CategoriesTap(), IngredientsTap()]));
   }
 }

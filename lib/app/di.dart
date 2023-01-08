@@ -2,9 +2,18 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:paprika/data/data_source/local_data_source.dart';
+import 'package:paprika/domain/usecase/auto_comp_ingredient_usecase.dart';
+import 'package:paprika/domain/usecase/auto_comp_recipe_usecase.dart';
 import 'package:paprika/domain/usecase/home_usecase.dart';
+import 'package:paprika/domain/usecase/recipe_information_usecase.dart';
 import 'package:paprika/domain/usecase/register_usecase.dart';
+import 'package:paprika/domain/usecase/search_ingredients_recipe_usecase.dart';
+import 'package:paprika/domain/usecase/search_recipe_usecase.dart';
+import 'package:paprika/presentation/ingredientsRecipesResult/view_model/ingredients_recipes_result_viewmodel.dart';
 import 'package:paprika/presentation/main/pages/home/view_model/home_viewmodel.dart';
+import 'package:paprika/presentation/recipesResults/view_model/recipes_results_viewmodel.dart';
+import 'package:paprika/presentation/searchIngredients/view_model/search_ingredients_viewmodel.dart';
+import 'package:paprika/presentation/searchRecipe/view_model/search_recipe_viewmodel.dart';
 import 'package:paprika/presentation/signup/view_model/signup_viewmodel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -75,5 +84,47 @@ initHomeModule() {
     instance.registerFactory<HomeUseCase>(() => HomeUseCase(instance()));
     instance.registerFactory<HomePageViewModel>(
         () => HomePageViewModel(instance()));
+  }
+}
+
+initSearchRecipeModule() {
+  if (!GetIt.I.isRegistered<AutoCompRecipeUseCase>()) {
+    instance.registerFactory<AutoCompRecipeUseCase>(
+        () => AutoCompRecipeUseCase(instance()));
+    instance.registerFactory<SearchRecipeViewModel>(
+        () => SearchRecipeViewModel(instance()));
+  }
+}
+
+initSearchIngredientModule() {
+  if (!GetIt.I.isRegistered<AutoCompIngredientUseCase>()) {
+    instance.registerFactory<AutoCompIngredientUseCase>(
+        () => AutoCompIngredientUseCase(instance()));
+    instance.registerFactory<SearchIngredientViewModel>(
+        () => SearchIngredientViewModel(instance()));
+  }
+}
+
+initRecipesResultModule() {
+  if (!GetIt.I.isRegistered<SearchRecipeUseCase>() ||
+      !GetIt.I.isRegistered<RecipeInformationUseCase>()) {
+    instance.registerFactory<SearchRecipeUseCase>(
+        () => SearchRecipeUseCase(instance()));
+    instance.registerFactory<RecipeInformationUseCase>(
+        () => RecipeInformationUseCase(instance()));
+    instance.registerFactory<RecipesResultViewModel>(
+        () => RecipesResultViewModel(instance(), instance()));
+  }
+}
+
+initIngredientRecipesResultModule() {
+  if (!GetIt.I.isRegistered<SearchIngredientsRecipeUseCase>() ||
+      !GetIt.I.isRegistered<RecipeInformationUseCase>()) {
+    instance.registerFactory<SearchIngredientsRecipeUseCase>(
+        () => SearchIngredientsRecipeUseCase(instance()));
+    instance.registerFactory<RecipeInformationUseCase>(
+        () => RecipeInformationUseCase(instance()));
+    instance.registerFactory<IngredientRecipesResultsViewModel>(
+        () => IngredientRecipesResultsViewModel(instance(), instance()));
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:paprika/domain/model/models.dart';
 import 'package:paprika/presentation/resources/color_manager.dart';
+import 'package:paprika/presentation/resources/strings_manager.dart';
 import 'package:paprika/presentation/resources/values_manager.dart';
 
 class StepsView extends StatefulWidget {
@@ -42,9 +43,9 @@ class _StepsViewState extends State<StepsView> {
                 horizontal: AppPadding.p12, vertical: AppPadding.p2),
             child: Column(children: [
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Text('${(_value * 100).round()}% Completed',
+                Text('${(_value * 100).round()}${AppStrings.completed}',
                     style: Theme.of(context).textTheme.labelMedium),
-                Text('$_currentStep/${widget.recipe.recipeSteps!.length} Steps',
+                Text('$_currentStep/${widget.recipe.recipeSteps!.length} ${AppStrings.steps}',
                     style: Theme.of(context).textTheme.labelMedium)
               ]),
               _directionsItem(),
@@ -64,14 +65,14 @@ class _StepsViewState extends State<StepsView> {
                       },
                       style: ElevatedButton.styleFrom(
                           elevation: 5.0,
-                          primary: ColorManager.darkRed,
+                          backgroundColor: ColorManager.darkRed,
                           fixedSize: Size(size.width, size.height * 0.07),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(AppSize.s8))),
                       child: Text(
                           _currentStep < widget.recipe.recipeSteps!.length
-                              ? 'Next Step'
-                              : 'Finish')))
+                              ? AppStrings.nextStep
+                              : AppStrings.finish)))
             ])));
   }
 
@@ -82,7 +83,7 @@ class _StepsViewState extends State<StepsView> {
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text(
-                  'Step ${widget.recipe.recipeSteps![_currentStep - 1].number}',
+                  '${AppStrings.step} ${widget.recipe.recipeSteps![_currentStep - 1].number}',
                   style: Theme.of(context).textTheme.titleLarge),
               const SizedBox(height: AppSize.s12),
               Flexible(

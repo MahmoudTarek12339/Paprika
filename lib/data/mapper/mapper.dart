@@ -115,17 +115,6 @@ extension AutoCompRecipeInfoResponseMapper on AutoCompRecipeInfoResponse? {
   }
 }
 
-extension AutoCompRecipesResultsResponseMapper
-    on AutoCompRecipesResultsResponse? {
-  List<String> toDomain() {
-    List<String> titles = (this?.titles?.map((title) => title.toDomain()) ??
-            const Iterable.empty())
-        .cast<String>()
-        .toList();
-    return titles;
-  }
-}
-
 extension SearchIngredientResponseMapper on SearchIngredientResponse? {
   SearchIngredientResults toDomain() {
     return SearchIngredientResults(
@@ -158,26 +147,3 @@ extension SearchRecipesWithIngResponseMapper on SearchRecipesWithIngResponse? {
   }
 }
 
-extension SearchRecipesWithIngResultsResponseMapper
-    on SearchRecipesWithIngResultsResponse? {
-  List<SearchRecipeWithIngResult> toDomain() {
-    List<SearchRecipeWithIngResult> results =
-        (this?.results?.map((result) => result.toDomain()) ??
-                const Iterable.empty())
-            .cast<SearchRecipeWithIngResult>()
-            .toList();
-    return results;
-  }
-}
-
-extension AutoCompIngredientsResultsResponseMapper
-    on AutoCompIngredientsResultsResponse? {
-  List<SearchIngredientResults> toDomain() {
-    List<SearchIngredientResults> results =
-        (this?.titles?.map((result) => result.toDomain()) ??
-                const Iterable.empty())
-            .cast<SearchIngredientResults>()
-            .toList();
-    return results;
-  }
-}

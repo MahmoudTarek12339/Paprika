@@ -97,7 +97,6 @@ class StateRenderer extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: children,
     );
   }
@@ -105,7 +104,6 @@ class StateRenderer extends StatelessWidget {
   Widget _getItemsColumn(List<Widget> children) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: children,
     );
   }
@@ -123,8 +121,8 @@ class StateRenderer extends StatelessWidget {
         padding: const EdgeInsets.all(AppPadding.p8),
         child: Text(
           message,
-          style: getRegularStyle(
-              color: ColorManager.black, fontSize: FontSize.s18),
+          style: getSemiBoldStyle(
+              color: ColorManager.black, fontSize: FontSize.s24),
         ),
       ),
     );

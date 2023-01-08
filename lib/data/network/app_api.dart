@@ -39,7 +39,7 @@ abstract class AppServiceClient2 {
       @Query("number") int number, @Query("query") String query);
 
   @GET('/recipes/autocomplete')
-  Future<AutoCompRecipesResultsResponse> searchRecipeAutoComp(
+  Future<List<AutoCompRecipeInfoResponse>> searchRecipeAutoComp(
       @Query("number") int number, @Query("query") String query);
 
   @GET('/food/ingredients/search')
@@ -47,10 +47,10 @@ abstract class AppServiceClient2 {
       @Query("number") int number, @Query("query") String query);
 
   @GET('/food/ingredients/autocomplete')
-  Future<AutoCompIngredientsResultsResponse> searchIngredientAutoComp(
+  Future<List<SearchIngredientResponse>> searchIngredientAutoComp(
       @Query("number") int number, @Query("query") String query);
 
   @GET('/recipes/findByIngredients')
-  Future<SearchRecipesWithIngResultsResponse> searchRecipesWithIng(
-      @Query("number") int number, @Query("query") String ingredients);
+  Future<List<SearchRecipesWithIngResponse>> searchRecipesWithIng(
+      @Query("number") int number, @Query("ingredients") String ingredients);
 }
