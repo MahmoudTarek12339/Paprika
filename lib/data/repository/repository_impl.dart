@@ -74,7 +74,7 @@ class RepositoryImpl implements Repository {
       RandomRecipeRequest randomRecipeRequest) async {
     try {
       final response = await _localDataSource
-          .getHomeData(randomRecipeRequest.tags == 'soup');
+          .getHomeData(randomRecipeRequest.tags.toLowerCase());
 
       return Right(response.toDomain());
     } catch (cacheError) {
@@ -85,7 +85,7 @@ class RepositoryImpl implements Repository {
           // success
           // return data
           _localDataSource.saveHomeToCache(
-              response, randomRecipeRequest.tags == 'soup');
+              response, randomRecipeRequest.tags.toLowerCase());
           return Right(response.toDomain());
         } catch (error) {
           return Left(ErrorHandler.handle(error).failure);

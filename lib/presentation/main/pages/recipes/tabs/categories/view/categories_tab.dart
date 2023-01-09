@@ -58,7 +58,10 @@ class _CategoriesTapState extends State<CategoriesTap> {
 
   Widget _categoryItem(context, index) {
     return InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, Routes.categoryRecipes,
+              arguments: {'category': categories[index]});
+        },
         child: Column(children: [
           SizedBox(
               height: 125,

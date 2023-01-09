@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:paprika/app/di.dart';
 import 'package:paprika/domain/model/models.dart';
+import 'package:paprika/presentation/categoryRecipes/view/category_recipes_view.dart';
 import 'package:paprika/presentation/ingredientsRecipesResult/view/ingredients_recipes_result_view.dart';
 import 'package:paprika/presentation/login/view/login_view.dart';
 import 'package:paprika/presentation/onboarding/view/onboarding_view.dart';
@@ -27,6 +28,7 @@ class Routes {
   static const String searchRecipe = "/searchRecipe";
   static const String searchIngredient = "/searchIngredient";
   static const String recipesResults = '/recipesResults';
+  static const String categoryRecipes = '/categoryRecipes';
   static const String ingredientRecipesResults = '/ingredientRecipesResults';
 }
 
@@ -82,6 +84,12 @@ class RouteGenerator {
         String ingredients = arguments['ingredients'] as String;
         return MaterialPageRoute(
             builder: (_) => IngredientRecipesResultsView(ingredients));
+      case Routes.categoryRecipes:
+        initCategoryRecipesModule();
+        Map<String, dynamic> arguments =
+            settings.arguments as Map<String, dynamic>;
+        Category category = arguments['category'] as Category;
+        return MaterialPageRoute(builder: (_) => CategoryRecipesView(category));
       default:
         return unDefinedRoute();
     }

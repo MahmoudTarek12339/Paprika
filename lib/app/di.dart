@@ -9,6 +9,7 @@ import 'package:paprika/domain/usecase/recipe_information_usecase.dart';
 import 'package:paprika/domain/usecase/register_usecase.dart';
 import 'package:paprika/domain/usecase/search_ingredients_recipe_usecase.dart';
 import 'package:paprika/domain/usecase/search_recipe_usecase.dart';
+import 'package:paprika/presentation/categoryRecipes/view_model/category_recipes_viewmodel.dart';
 import 'package:paprika/presentation/ingredientsRecipesResult/view_model/ingredients_recipes_result_viewmodel.dart';
 import 'package:paprika/presentation/main/pages/home/view_model/home_viewmodel.dart';
 import 'package:paprika/presentation/recipesResults/view_model/recipes_results_viewmodel.dart';
@@ -87,6 +88,16 @@ initHomeModule() {
   }
 }
 
+initCategoryRecipesModule() {
+  if (!GetIt.I.isRegistered<HomeUseCase>()) {
+    instance.registerFactory<HomeUseCase>(() => HomeUseCase(instance()));
+  }
+  if (!GetIt.I.isRegistered<CategoryRecipesViewModel>()) {
+    instance.registerFactory<CategoryRecipesViewModel>(
+        () => CategoryRecipesViewModel(instance()));
+  }
+}
+
 initSearchRecipeModule() {
   if (!GetIt.I.isRegistered<AutoCompRecipeUseCase>()) {
     instance.registerFactory<AutoCompRecipeUseCase>(
@@ -106,24 +117,27 @@ initSearchIngredientModule() {
 }
 
 initRecipesResultModule() {
+  if (!GetIt.I.isRegistered<RecipeInformationUseCase>()) {
+    instance.registerFactory<RecipeInformationUseCase>(
+        () => RecipeInformationUseCase(instance()));
+  }
   if (!GetIt.I.isRegistered<SearchRecipeUseCase>() ||
       !GetIt.I.isRegistered<RecipeInformationUseCase>()) {
     instance.registerFactory<SearchRecipeUseCase>(
         () => SearchRecipeUseCase(instance()));
-    instance.registerFactory<RecipeInformationUseCase>(
-        () => RecipeInformationUseCase(instance()));
     instance.registerFactory<RecipesResultViewModel>(
         () => RecipesResultViewModel(instance(), instance()));
   }
 }
 
 initIngredientRecipesResultModule() {
-  if (!GetIt.I.isRegistered<SearchIngredientsRecipeUseCase>() ||
-      !GetIt.I.isRegistered<RecipeInformationUseCase>()) {
-    instance.registerFactory<SearchIngredientsRecipeUseCase>(
-        () => SearchIngredientsRecipeUseCase(instance()));
+  if (!GetIt.I.isRegistered<RecipeInformationUseCase>()) {
     instance.registerFactory<RecipeInformationUseCase>(
         () => RecipeInformationUseCase(instance()));
+  }
+  if (!GetIt.I.isRegistered<SearchIngredientsRecipeUseCase>()) {
+    instance.registerFactory<SearchIngredientsRecipeUseCase>(
+        () => SearchIngredientsRecipeUseCase(instance()));
     instance.registerFactory<IngredientRecipesResultsViewModel>(
         () => IngredientRecipesResultsViewModel(instance(), instance()));
   }
